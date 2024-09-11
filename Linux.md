@@ -1,0 +1,2370 @@
+# Linux
+
+### 简介
+
+- Linux终端是Linux控制台，我们依靠各种命令与内核打交道来完成我们日常的任务
+- colin@colinsoft:~$
+    - colin
+        - 用户名
+    - colinsoft
+        - 主机名
+    - ~
+        - 根目录下home下当前当前用户
+    - /
+        - 根目录
+    - $
+        - 普通用户
+    - \#
+        - root用户
+            - sudo su
+                - 可以提高用户权限，exit退出
+- Linux下的文件夹
+    - Linux是一种文件系统，所有的东西都是文件的形式存在。Linux系统中的一切文件都是从“根（/）”目录开始的，并按照文件系统层次化标准（FHS）采用树形结构来存放文件，以及定义了常见目录的用途。另外，Linux系统中的文件和目录名称是严格区分大小写的
+    - 
+- 系统目录结构
+    - 
+
+### 命令
+
+#### shell指令
+
+- shell家族 
+    - shell：命令解释器，根据输入的命令执行相应的命令
+    - 终端实际上就是一个进程，里面跑的就是命令解析器，可以解析输入的命令
+- cat命令
+    - cat是一个文本文件查看和连接工具
+    - 使用方法：
+        - cat [参数] 文件名
+            - cat /etc/shells
+- echo命令
+    - echo用于字符串的输出
+    - 使用方法
+        - echo 字符串/变量
+            - echo "hello world"
+            - echo $SHELL (SHELL是全局变量，$表示变量)
+            - echo "hello world" > a.txt(>是输出重定向的意思)
+                - 文件内容被覆盖，时间更新
+- ls命令（目录命令中详细）
+    -  打印目录下的清单
+    - 使用方法
+        - ls [路径]
+            - ls
+                - 打印当前目录下的清单
+            - ls /bin
+                - 打印 /bin下的清单
+    - 白色是普通文件，红色是压缩文件，蓝色是文件夹，绿色是可执行文件
+- cd命令
+    - 用于切换当前工作目录
+    - 使用方法
+        - cd [路径]
+            - cd /home
+                - 切换到根目录下的home文件夹
+            - cd ..
+                - 切换到上一层目录
+            - cd
+                - 回到home目录
+            - cd -
+                - 回到上一次的位置
+- tab键
+    - 如果存在多个选项，按两下Tab键会出现所有可选项；如果路径唯一，一下Tab键可以补齐路径
+- 快捷键
+    - 清屏
+        - ctrl + l（小L）
+        - 命令：clear
+    - 删除光标前面
+        - 删除键：backspace
+    - 删除光标后面
+        - Ctrl + d
+    - 光标来到最前面
+        - Ctrl + a
+    - 光标来到最后面
+        - Ctrl + e
+    - 查看前面输入的指令
+        - Ctrl + p
+        - 向上箭头
+    - 查看后面输入的指令
+        - Ctrl + n
+        - 向下箭头
+    - 查看历史输入的命令
+        - history
+
+#### 目录命令
+
+- ls命令
+    -  打印目录下的清单
+    - 使用方法
+        - ls [路径]
+            - ls
+                - 打印当前目录下的清单
+            - ls /bin
+                - 打印 /bin下的清单
+    - 白色是普通文件，红色是压缩文件，蓝色是文件夹，绿色是可执行文件
+    - 参数
+        - -a
+            - 列出隐藏文件，文件中以“.”开头的均为隐藏文件
+                - ~/.bashrc
+                - 显示的信息开头有10个字符，第一个表示文件类型，后面九个表示符号文件的访问权限，分为3位，每组三位。第一组表示文件属主的权限，第二组表示同组用户的权限，第三组表示其他用户的权限
+                    - 
+                    - 第一个符号
+                        - \-
+                            - 普通文件
+                        - d
+                            - 目录
+                        - l
+                            - 符号链接
+                        - b
+                            - 块设备文件
+                        - c
+                            - 字符设备文件
+                        - s
+                            - socket文件，网络套接字
+                        - p
+                            - 管道
+                    - 后面九个
+                        - r：读
+                        - w：写
+                        - x：可执行。对于目录，表示进入权限
+                        - -：没有相应的位置的权限
+        - -l
+            - 列出文件的详细信息
+        - -R
+            - 连同子目录中的内容一起列出来
+                - 和树类似，内容基本一样，显示方式不一样
+- switch
+    - 使用方法
+        - which ls
+        - which cat
+- tree
+    - 按照树形结构显示目录和文件
+- pwd
+    - 查看当前工作目录的完整路径
+- mkdir
+    - 创建目录（directory），可以一次创建多个。要创建文件夹或目录的用户必须对所创建的文件夹的父文件夹具有写权限，并且不能重名
+    - 使用方法
+        - mkdir 0524
+        - mkdir aa/bb/cc -p (创建带子目录的文件夹)
+        - mkdir ee ff kk （一次创建多个文件夹）
+- rmdir
+    - 删除空目录，可以一次删除多个
+    - 使用方法
+        - rmdir dd
+        - rmdir ee ff
+- touch
+    - 创建文件，如果文件已经存在就更新文件创建时间
+    - touch a1
+- rm
+    - 删除文件或目录
+    - 使用方法
+        - rm a1
+            - 删除普通文件
+        - rm -r aa
+            - 递归删除文件夹及文件夹下的内容
+        - rm -rf kk
+            - 强制删除问价或目录，不需要询问
+        - rm -rf a*
+            - *通配符，删除以a位前缀的文件和文件夹
+- mv
+    - 重命名或移动文件
+    - 使用方法：mv 源文件名 目的文件名/文件名 （如果是文件名就是改名字，如果是文件夹名就是移动到对应的文件夹中）
+        - 如果两个文件文件都有，那么源文件会覆盖目标文件（无论内容还是时间都会覆盖为源文件的），并且源文件这个名的文件消失
+            - 相当于源文件改名，另一个文件消失（确实，inode值没变）
+- cp
+    - 拷贝文件或目录
+        - 文件覆盖已存在的会覆盖
+            - 内容覆盖，时间更新
+    - cp a1 a2
+
+#### 文本查看命令
+
+- more
+    - 查看文本文件内容，屏幕显示完一屏就等待用户按下任意键在滚动到下一屏，如果中途不想继续看下去，可以按ctrl + c 或者 q终止显示
+    - more命令执行完以后会有显示过的内容留在终端上
+- less
+    - 查看文本内容，屏幕显示完一屏就等待用户按键，用户可以向上或者向下查看，如果中途不想继续看下去，可以按ctrl c 或q终止显示
+    - ctrl p ctrl n 向上，向下
+    - 形式与more一致，但是显示完以后内容不会留在终端上
+- head
+    - 显示指定文件的前面几行。如果没有指定文件，将从标准输入（键盘）上读取。如果没有指定要显示的行数，则默认显示前10行
+    - head 5 b.txt
+- tail
+    - 显示文件的最后几行。若没有指定显示的行或字符数则默认显示末尾10行
+    - tail -5 b.txt
+
+#### vi命令
+
+- 创建并编辑文本
+- 语法
+    - vi 文件名
+        - vi aaa
+- i
+    - 输入文本
+- ESC
+    -  结束输入文本
+- wq
+    - 保存并退出
+- q!
+    - 不保存强制退出
+
+- ln命令
+    - 链接命令
+        - ln 被链接文件 链接文件
+    - 硬链接
+        - 默认情况下，ln产生硬链接
+        - 只能连接文本，不能连接目录
+        - ln a2 test
+            - 创建完硬链接后，a2和test文件的硬链接计数都是2，文件内容一致。
+            - 创建的文件与源文件一样，包括时间
+    - 符号链接
+        - -s
+        - ln a2 haha -s
+            - 符号链接文件的大小与被链接文件的名字长度一样
+    - 如果删除a2文件，test文件的硬链接计数变成1，haha符号链接失效，test文件的内容不变
+    - 重新创建一个a2文件，haha的符号链接又生效了，test的硬链接任然失效。
+        - test文件和a2文件的内容不一致，硬链接计数也都是1
+    - 先给文件创建硬链接，和符号链接后，通过符号链接文件修改内容，原文件和硬链接文件的大小都变成一样的了
+    - 不同情况下的影响
+        - 改变名字
+            - 影响符号链接，但是不会影响硬链接
+        - 改变路径
+            - 影响符号链接，但是不会影响硬链接
+- wc命令
+    - 计算文件的byte数，字数或是行数
+    - -c或-bytes或-chars
+        - 只显示bytes数
+    - -l 或 -lines 
+        - 只显示行数
+    - -w 或 -words
+        - 只显示单词数
+- od命令
+    - -t　指定数据的显示格式
+    - c
+        - ASCII字符或反斜杠序列
+    - d
+        - [SIZE]有符号十进制数，每个整数SIZE字节
+    - f
+        - [SIZE]浮点数，每个整数SIZE字节
+    - o
+        - [SIZE]八进制（系统默认值为02），每个整数SIZE字节
+    - u
+        - [SIZE]无符号十进制数，每个整数SIZE字节
+    - x
+        - [SIZE]十六进制数，每个整数SIZE字节
+    - od -tcx file1
+- du命令
+    - 查看某个目录的大小
+    - 使用
+        - du -hm 目录
+            - 以M为单位
+        - du -hb 目录
+            - 以B为单位
+        - du -hk 目录
+            - 以K为单位,4K的整数倍
+- df命令
+    - 查看磁盘的使用情况
+    - 使用
+        - df
+        - df -h
+
+#### 文件属性和用户组
+
+- man命令
+    - 查看命令手册，每个命令和系统用函数都有自己的man page
+    - 语法 man 命令
+        - man ls
+    - ctrl p/n ，向上/下
+    - q 退出
+- whoami
+    - 查看当前登录用户
+- sudo
+    - 临时提升用户权限至root权限，第一次需要密码，每次有一个使用时间限制（多长时间内sudo命令不用输入密码）
+    - sudo /etc/sudoers命令可以查看输入密码后的超时时间
+- chmod命令
+    - 更改文件目录的访问权限
+    - 语法
+        - chmod [mode] 文件名
+            - r，w，x字母任意组合
+            - 数字
+                - 0：没有权限
+                - 1：可执行权限
+                - 2：写入权限
+                - 4：可读权限
+        - chmod 777 a2
+- chown
+    - 更改某个文件或目录的属主和属组
+    - 参数
+        - -R
+            - 递归式的改变指定目录及其下的所有子目录和文件拥有者
+        - -V
+            - 显示chown命令所做的工作
+    - sudo chown root:root a2
+- umask
+    - 指定用户创建文件时的掩码
+        - 默认0002
+
+#### 查找与检索
+
+- find命令
+    - 在目录中搜索文件
+    - 语法
+        - find 查找路径 -name 要查找的文件名（一般都是按照文件名查找）
+            - find . -name "a2"
+            - find . -name "a*"
+- grep命令
+    - 在指定文件中搜素特定的内容，并将含有这些内容的行输出到标准输出。若不指定文件名，则从标准输入读取
+    - 参数
+        - -c : 只输出匹配行的计数。
+        - -i: 不区分大小写(只适用于单字符)。
+        - -h : 查询多文件时不显示文件名。
+        - -l : 查询多文件时只输出包含匹配字符的文件名。
+        - -n: 显示匹配行及行号。
+        - -s: 不显示不存在或无匹配文本的错误信息。
+        - -v：显示不包含匹配文本的所有行。
+        - -R：连同子目录中所有文件一起查找。
+    - grep ‘printf’ /usr/include -R
+
+- 安装卸载软件
+    - apt-get 命令
+        - studo vi /etc/apt/sources.list：查看源服务器列表
+        - sudo apt-get update     更新源
+        - sudo apt-get install package 安装包
+        - sudo apt-get remove package 删除包
+        - sudo apt-cache search package 搜索软件包
+        - sudo apt-cache show package 获取包的相关信息，如说明、大小、版本等。
+        - sudo apt-get install package  ---reinstall  重新安装包
+        - sudo apt-get –f install 修复安装
+        - sudo apt-get remove package –purge 删除包，包括配置文件等
+        - sudo apt-get build-dep package  安装相关的编译环境。
+        - sudo apt-get upgrade 更新已安装的包
+        - ​    sudo apt-get dist-upgrade 升级系统
+        - sudo apt-cache depends package  了解使用该包依赖哪些包
+        - sudo apt-cache rdepends package 查看该包被哪些包依赖
+        - sudo apt-get source package   下载该包的源代码
+        - sudo apt-get clean && sudo apt-get autoclean  清理无用的包
+        - sudo apt-get check 检查是否有损坏的依赖
+    - deb包安装
+        - 安装deb软件包命令：sudo dpkg –I XXX.deb
+        - 删除软件包命令：sudo dpkg –r XXX.deb
+        - 连同配置文件一起删除命令：sudo dpkg –r –purge XXX.deb
+        - 查看软件包信息命令：sudo dpkg –info XXX.deb
+        - 查看文件拷贝详情命令： sudo dpkg –L xxx.deb
+        - 查看系统中已安装软件包信息命令：sudo dpkg -l
+        - 重新配置软件包命令：sudo dpkg –reconfigure xxx
+    - 源码安装
+        - 1.解压缩源代码包
+        - 2.cd dir
+        - 3../configure
+            - 检测文件是否确实，创建Makefile，检测编译环境
+        - 4.make
+            - 编译源码，生成库和可执行程序
+        - 5.sudo make install
+            - 把库和可执行程序，安装到系统路径下
+
+#### 磁盘管理
+
+- mount命令
+    - 语法
+        - mount 磁盘类型 源挂载的磁盘名 目的文件名
+        - 磁盘类型通常不必指定。mount会自动选择正确的类型。常用类型有：
+            - ​    光盘或光盘镜像：iso9660
+            - ​    DOS fat16文件系统：msdos
+            - ​    Windows 9x fat32文件系统：vfat
+            - ​    Windows NT ntfs文件系统：ntfs
+            - ​    mount windows文件网络共享：smbfs
+            - ​    UNIX(LINUX) 文件网络共享：nfs
+- umount
+    - 卸载
+    - sudo umount 挂载点
+
+- 用户管理
+    - useradd
+        - 创建用户
+        - -s 指定新用户登录时shell类型 g 指定所属组，改组必须已经存在 -G 指定附属组，改组必须已经存在 -d 用户家目录 -m 用户家目录不存在时，自动创建该目录
+        - sudo useradd –s /bin/bash –d /home/ada –m ada(不指定所属组)
+    - groupadd
+        - 设置用户组
+        - groupadd 群组名
+            - sudo groupadd ada(添加用户后会自动创建组)
+    - passwd
+        - 设置密码
+        - passwd 新密码
+            - sudo passwd ada
+    - su
+        - 切换用户
+        - su 用户名
+            - su ada
+    - 给新添加的用户添加sudo权限
+        - 
+    - 切换到root用户
+        - sudo su
+    - userdel
+        - 删除用户
+        - userdel 选项 用户名
+            - userdel -r ada
+
+#### 进程管理
+
+- who
+    - 查看当前在线上的用户情况
+        - 查看当前在线上的用户情况。所有的选项都是可选的，不使用任何选项时，who命令将显示以下三项内容
+            - login name：登录用户名;
+            - terminal line:使用终端设备；
+            - login time：登录到系统时间；
+        - who –uH
+            - 名称  线路       时间          空闲        进程号      备注
+- ps
+    - 监视后台进程工作情况
+    - 常用：最常用的三个参数是u、a、x
+        - -e 显示所有进程
+        - -f 全格式
+        - -h 不显示标题
+        - -l 长格式
+        - -w 宽输出。
+        - a  显示终端上的所有进程，包括其他用户的进程。
+        - u 以用户为主的格式来显示程序状况
+        - r  只显示正在运行的进程。
+        - x  显示没有控制终端的进程。
+    - Head 标头
+        - USER 用户名
+        - UID  用户ID（User ID）
+        - PID  进程ID（Process ID）
+        - PPID 父进程的进程ID（Parent Process ID）
+        - SID  会话ID（Session ID）
+        - % CPU 进程的CPU占用率
+        - % MEM 进程的内存占用率
+        - VSZ 进程所使用的虚存的大小（Virtual Size）
+        - RSS 进程使用的驻留集大小或者是实际内存的大小，kbytes字节
+        - TTY 与进程关联的终端（tty）
+        - STAT 进程的状态：进程状态使用字符表示的（STAT的状态码）
+        - R    运行  Runnable(on run queue)      正在运行或在运行队列中等待.
+        - S    睡眠  Sleeping       休眠中，受阻，在等待某个条件的形成或接受到信号
+        - I   空闲  Idle
+        - Z    僵死  Zombie（a defunct process）  进程已终止，但进程描述符存在，直到父进程调用wait4()系统调用后释放。
+        - D   不可中断  Uninterruptible sleep(ususally IO)  收到信号不唤醒和不可运行，进程必须等待直到有中断发生。
+        - T   停止   Terminate      进程收到SIGSTOP, SIGSTP, SIGTIN, SIGTOU信号后停止运行。
+        - P   等待交换页
+        - W  无驻留页  has no resident pages   没有足够的记忆体分页可分配
+        - X   死掉的进程
+        - < 高优先级进程               高优先序的进程
+        - N   低优先级进程              低优先序的进程
+        - L   内存锁页    Lock         有记忆体分页分配并缩在记忆体内
+        - s   进程的领导者（在它之下有子进程）
+        - l   多进程的（使用 CLONE_THREAD, 类似 NPTL pthreads）
+        - \+ 位于后台的进程组
+        - START  进程启动时间和日期
+        - TIME   进程使用的总CPU时间
+        - COMMAND  正在执行的命令行命令
+        - NI     优先级（Nice）
+        - PRI    进程优先级编号（Priority）
+        - WCHAN 进程正在睡眠的内核函数名称；该函数的名称是从 / root / system.map文件中获得的。
+        - FLAGS  与进程相关的数字标识。
+- jobs
+    - 用来显示当前shell下正在运行哪些作业（后台作业）
+- fg命令
+    - 把指定的后台作业或挂起作业移到前台运行
+    - fg 一个或多个进程的PID/命名名称/作业号（作业号前面要带一个%号）
+- bg
+    - 把被挂起的进程提到后台运行
+    - bg 一个或多个进程的PID/命名名称/作业号（作业号前面要带一个%号）
+- kill
+    - 向指定进程发送信号
+    - kill -l
+        - 查看信号编号
+    - kill -SIGKILL 2323 或者 kill -9 2368
+        - 杀死进程
+    - kill命令如果不带参数而直接跟pid，就是发给该进程SIGTERM信号，大部分进程收到该信号就会终止。但是被挂起的进程不能处理信号，所以必须发SIGKILL信号，由系统强制终止进程
+- evn
+    - 查看当前进程环境变量
+
+#### 其他命令
+
+- 切换到命令行终端的方法
+    - ctrl + alt + (F1~F6任意一个)
+- 切换出来
+    - alt+F7
+- date
+    - 查看当前时间
+- 创建终端标签：Ctrl+Shift+t
+- 切换标签  Alt+n （n=1）
+- 新开终端 ctrl+shift+n
+    - 在终端时
+- umask
+    - 指定用户创建文件时的掩码
+        - 默认0002
+
+#### 关机重启
+
+- poweroff
+    - 给系统断电
+- shutdown
+    - 关机
+- reboot
+    - 重启系统
+- uname -a
+    - 查看内核版本信息
+- lsb_release -a
+    - 查看发行版本信息
+- free -m
+    - 查看空闲内存
+
+#### 调试与编译
+
+- vim
+    - vi是一种 文本编辑程序，只有命令，且命令繁多
+    - 三种工作模式
+        - 命令模式
+        - 文本输入模式
+        - 末行模式
+    - 进入插入模式
+        - i：插入光标前一个字符
+        - I：插入行首
+        - a：插入光标后一个字符
+        - A：插入行末
+        - o：向下新开一行，插入行首
+        - O：向上新开一行，插入行首
+    - 进入命令模式
+        - ESC：从插入模式或末行模式进入命令模式
+    - 移动光标：
+        - h：左移
+        - j：下移
+        - k：上移
+        - I：右移
+        - M：光标移动到中间行
+        - L：光标移动到屏幕最后一行行首
+        - G：移动到指定行，行号， -G
+        - w：向后一次移动一个字
+        - b：向前一次移动一个字
+        - {：按段移动，上移
+        - }：按段移动，下移
+        - Ctr + d
+            - 向下翻半屏
+        - Ctr + u
+            - 向上翻半屏
+        - Ctr + f
+            - 向下翻一屏
+        - Ctr + b
+            - 向上翻一屏
+        - gg：光标移动文件开头
+        - G：光标移动到文件末尾
+    - 删除命令
+        - x：删除光标后一个字符，相当于Del
+        - X：删除光标前一个字符，相当于Backspace
+        - dd：删除光标所在行，n dd 删除指定行数
+        - D：删除光标后本行所有内容，包含光标所在字符
+        - d0（零）：删除光标前文本行所有内容，不包含光标所在字符
+        - dw：删除光标开始位置的字，包含光标所在字符
+    - 撤销命令
+        - u：一步一步撤销
+        - U：一次性撤销当前行所做的所有操作
+        - Ctr + r：反撤销
+    - 复制粘贴
+        - yy：复制当前行
+        - n yy 复制 n 行
+        - p：在光标所在位置向下新开辟一行，粘贴
+    - 查找命令
+        - /：str查找
+        - n：下一个
+        - N：上一个
+    - 代码排版
+        - gg=G：代码自动缩进排版
+    - 查看Man Page
+        - 光标移动到函数上，shift + k
+        - 光标移动到函数上，3 shift + k，查看第三章的ManPage
+    - vim分屏操作
+        - 启动分屏
+            - sp/vim -o file1 file2
+                - 上下分屏，后可跟文件名
+            - vsp/vim -O file1 file2
+                - 左右分屏，后可跟文件名
+        - 切换窗口
+            - ctr + w + w
+        - 关闭分屏
+            - 关闭当前窗口：ctrl + w c
+            - 光比当前窗口，如果只剩最后一个了，则退出vim：ctrl + w q
+
+##### GCC
+
+- -v
+    - 查看gcc版本号（不同的版本支持的c/c++特性是不一样的）
+    - gcc -v
+- -l(大i)
+    - 指定头文件目录，-I和头文件之间没有空格
+    - gcc main.c add.c -I./include -o myapp
+    - 如果编译不加-l的参数就会报头文件找不到的错误
+- -o
+    - 用于指定要生成的结果文件，后面跟的就是结果文件名字
+- -g
+    - 包含调试信息。-On n = 0 ~ 2编译优化，n越大优化越多
+    - gcc main.c add.c -I./include -g -o myappp1
+        - 带调试信息的生成文件比不带调试信息的生成文件大
+    - 使用gdb调试执行代码：gdb myapp1
+        - list或l命令：查看代码，默认是10行，想继续看按回车键
+        - start/run运行程序：有区别
+            - 默认在main函数入口位置停止
+        - continue可以继续执行，n可以逐过程调试
+        - quit/q可以退出调试
+    - 没有使用-g选项生成出来的myapp执行gdb，执行list等命令的时候会报错
+- -Wall
+    - 提示更多警告信息
+    - gcc myc.c myfun.c -I./include -g -Wall -o myapp1
+        - 当有未使用的变量时：会将共变量未使用
+- -D
+    - 编译时定义宏，注意-D和宏之间没有空格
+    - gcc main.c add.c -I./include -g -DDEF_DEBUG -o myapp1
+
+- 编译过程
+    - 预处理
+        - 头文件展开，宏替换等#开始的指令的执行，生成.i文件（预处理器完成）。参数-E  --->执行预处理
+            - gcc add.c -I/.include -E -o add.i
+    - 编译
+        - 预处理之后的文件编译成汇编语言，生成.s文件（编译器来完成）。参数 -S--->执行预编译，编译
+            - gcc add.c -I/.include -S -o add.s
+    - 汇编
+        - 汇编语言变成机器语言，生成.o文件（汇编器完成）。参数-c -->编译但不链接---->执行预编译，编译，汇编
+            - gcc add.c -I/.include -c
+    - 链接
+        - 将目标语言，静态库，动态库生成可执行文件（连接器完成）。参数-o --->输出（如果不加免得选项，默认生成可执行文件。如果加上-E/S/c生成对应的文件，-o指明文件名，不加-o默认生成a.out）
+
+##### GDB调试过程
+
+- gdb 调试可执行文件名字
+- list 或 l
+    - 查看代码，默认看10行代码
+    - list 19 或 l 19
+        - 查看19行附近的10行代码，上5行下四行
+- start
+    - 开始执行函数，会在mian函数的第一行代码处停止
+- next
+    - 逐过程，代码执行完以后可以执行start函数重新执行一遍
+- step/s
+    - 逐语句，可以跳转到某一个函数里
+- 回车是继续执行上面执行过的那个命令
+- finish
+    - 跳出当前函数，跳出函数以后，会打印函数的返回值
+- print 或 p
+    - 查看变量内容，print *(&变量名)/p 变量名
+    - print *(&m)
+    - p day
+- display
+    - 持续监测变量
+    - display 变量名
+        - display day
+    - 函数结束以后，不打印局部变量
+    - 如果重新进入函数，会继续打印检测的局部变量
+- undisplay
+    - 结束检测
+    - undisplay  观察编号
+- break
+    - 下断点
+    - break 行号
+        - 特定的行加设一个断点
+        - 简写 ： b  16
+    - 重新加回来的断点编号和原来的编号不一致
+    - break 函数名
+        - 给特定的函数加设一个断点
+- info breakpoints
+    - 查看断点列表
+    - 可以查看断点被触发的次数
+- delete 断点编号
+    - 支持简写 ： d  断点编号
+- run
+    - 可以直接执行到断点处
+    - 执行的过程中添加的断点可以生效
+- continue
+    - 继续执行到下一个断点
+- disable
+    - 临时禁用断点
+    - 可以在执行过程中禁用断点
+    - disable 断点号
+    - 重新run后，被禁用的断点仍然被禁用，不生效
+- enable
+    - 禁用的断点重新启用
+    - enable 断点号
+        - enable 4
+- quit / q
+    - 退出gdb调试
+- set var
+    - 设置变量的值（谨慎使用）
+    - set var 变量 = 值
+        - set var m = 5
+
+- makefile文件
+    - 项目管理工具
+    - 优势
+        - 可以便捷的编译管理代码（不用每次都写复杂的编译命令）
+        - 大大节省编译时间（减少编译成本）
+            - 
+        - 重复性极强（一次编译终身受益），可以反复使用管理编译不同的工程
+    - makefile三要素
+        - 目标
+            - makefile的目标是完成编译， 创建应用，目标名为application_name
+                - 生成文件的名字
+        - 依赖
+            - 绝大多数情况下，依赖为源文件或资源文件
+        - 命令
+            - 确定了目标与依赖后，使用GCC命令完成工程编译
+    - 创建Makefile
+        - 创建脚本文件时要注意，脚本名为Makefile或者makefile
+    - 编写makefile项目管理脚本
+        - 目标：依赖              命令（前面为tab不是空格）
+            - myapp:main.c add.c            gcc mian.c add,c -o myapp
+                - 目标为：myapp（生成文件为myapp）
+                - 依赖文件：main.c add.c
+    - make
+        - 执行脚本，自动寻找目录下的makefile脚本进行执行
+    - makefile执行原理及注意事项
+        - makefile脚本编写自顶向下建立依赖关系，自底向上执行命令
+            - 最终目标写在最上面，makefile只会生成一个目标文件，当这个命令中的某些文件没有，他会向下寻找，这才会生成其他目标文件
+        - 默认情况下makefile只会执行一个目标，若要执行多个目标，那么这些目标之间必须有主从关系（逻辑关联），如果是主从目录结构，那么makefile会解释为一个统一的目标，所有目标都会执行
+    - makefile变量的定义与使用
+        - 都是键值对形式，等号左侧为key，右侧为value
+        - 用户自定义变量
+            - 无需指定类型，默认情况下存储的数据都是字符串
+            - 变量名可以由大小写，数字，_，组成。大多数情况下，用大写定义变量名，首字符不允许用数字开头
+            - 使用一个变量存储的值，那么要对该变量进行取值操作：$(变量名)
+        - 内置变量
+            - $@
+                - 表示目标名，随着目标的变更而变化
+            - $^
+                - 获取当前目标的所有依赖项
+            - $<
+                - 表示依赖中的第一项
+    - 内置函数和内建语法
+        - wildcard
+            - 文件名处理函数，获取某个路径下所有文件名
+            - 变量名 = $(wildcard(*.c) )
+                - 获取当前路径下的所有.c文件，并存到变量中
+        - patsubst
+            - 字符串处理函数
+            - dfile = $(patsubst %.c , %.o , $(sfile) )
+                - 该函数可以对一个字符串进行处理和替换，将sfile中所有的.c后缀文件名替换为.o ，替换完毕后存储到dfile变量中
+        - 内建语法
+            - %.o : %.c         gcc -I../include -c $<
+                - 任意的.o是由.c生成的，改语法可以自动遍历迭代当前目录，生成.o文件
+    - makefile中的常见变量
+        - TARGET = app
+            - 用于存储目标名
+        - CC = g++
+            - 用于存储编译器版本
+        - INCLUDE_PATH = ../include
+            - 用于存储头文件路径
+        - INSTALL_PATH = /user/bin/
+            - 安装位置
+        - LIBRARY_PATH = ../library
+            - 存放共享库或静态库位置
+        - CFLAGS = -I$(INCLUDE_PATH) -c -g -wall
+            - 编译选项
+        - CPPFLAGS = -D -L -l -01 -02 -03
+            - 预处理选项，编译优化及库使用
+        - RM = sudo rm -rf
+        - COPY = sudo cp
+    - 功能目标
+        - 与主目标不同，功能目标没有任何依赖，执行功能目标完成特定选项，仅此而已，如果想执行一个功能目标直接make 目标名即可
+        - clean
+            - 项目打包发布时要清理掉一些临时文件与中间文件
+            - clean:        rm *.o target_name -rf
+        - output
+            - 在makefile编码阶段打印一些临时数据等
+            - putput:        echo "var_name"
+        - install
+            - 用于安装移动编译后的ELF执行程序
+            - install:          sudo cp target /usr/bin/
+        - distclean
+            - 卸载应用
+            - distclean:         sudo rm /usr/bin/target -rf
+
+### 文件IO
+
+- 文件基础IO介绍
+    - 标准函数与系统函数的区别
+        - C标准函数，在Linux系统中执行，会先调用应用层的API，然后调用系统层的API，通过系统层的API去调用驱动中的函数，输出到对用设备中
+        - c语言能够在不同的系统中进行编译，是因为不同的编译工具gcc/vs会根据不同的操作系统编译调用不同系统里面的应用层API，编译以后的可执行文件不能再不同的系统中执行，是用为不同的系统中对应的应用层API不一样，执行的过程中会发现调用的函数不存在
+        - 同样的操作系统能在不同的硬件设备上运行起来，是因为不同的设备适配了不同的驱动程序，但是驱动程序对外接口是一致的
+    - 为什么学习c标准函数还要学习系统函数
+        - c标准函数会调用Linux的系统函数，但是Linux的系统函数可以做的事情更多。比如fopen，fwrite只能向文件中读写数据，不能向显示设备和磁盘里面读写数据，但是Linux系统函数write可以向网络和显示设备中写数据，因此，c标准函数是有一定的局限性的
+    - c语言中的文件指针
+        - 
+        - c语言指针是一个大的结构体，里面包括了三个部分：文件描述符，f_pos（当前位置）和buffer（缓冲区）
+            - 文件描述符指向真实文件
+            - f_pos当前文件读写到什么位置了
+            - 
+    - PCB
+        - 
+        - PCB：进程控制块，进行进程的管理，可以在/usr/scr/linux-headers-版本号/include/linux/sched.h文件里查看
+        - 虚拟内存
+            - 
+    - 默认打开3个文件描述符
+        - STDIN_FILENO         0
+        - STDOUT_FILENO     1
+        - STDERR_FILENO      2
+    - open函数
+        - 功能：打开或创建一个文件
+        - 头文件
+            - \#include<sys/types.h> #include<sys/stat.h> #include<fcntl.h>
+        - 函数定义
+            - int open(const char* pathname, int flags); int open(const char* pathname, int flags, mode_t mode);
+                - pathname：要到开或者创建的文件名，相对路径或绝对路径
+                - flags：一些常数供选择，可以多个常数按位或运算符连接起来，O_开头，表示or
+                    - 必选项：必须指定一个，且仅允许指定一个
+                        - O_RDONLY：只读打开
+                        - O_WRONLY：只写打开
+                        - O_RDWR：可读可写打开
+                    - 可选项：0个或多个，按位或连接作为参数
+                        - O_APPEND
+                            - 表示追加。如果文件已经有内容了，这次打开文件所写的数据附加祷文家的末尾而不是覆盖原来的内容
+                        - O_CREAT
+                            - 若文件不存在则创建它。使用此选项时学要提供第三个参数mode。表示该文件的访问权限
+                        - O_EXCL
+                            - 如果同时指定了O_CREAT，并且文件已经存在，则出错返回
+                        - O_TRUNC
+                            - 如果文件已经存在，并且以只写或可读可写方式打开，则将其长度截断为0字节
+                        - O_NONBLOCK
+                            - 对于设备文件，以O_NONBLOCK方式打开可以做非阻塞I/O
+                - mode：指定文件权限
+                    - 八进制表示：0644：-rw-r--r--
+                    - 文件权限由mode和usmask共同决定
+        - 返回值
+            - 成功返回新分配的文件描述符，出错返回-1并设置errno
+        - open与c标准库的fopen区别
+            - 
+    - close函数
+        - 功能：关闭一个已经打开的文件
+        - 头文件：#include <unistd.h>
+        - 函数定义
+            - int close(int fd);
+                - fd：是要关闭的文件描述符
+        - 返回值：成功返回0，出错返回-1并且设置errno
+        - 
+    - read函数
+        - 功能：从打开的设备或文件中读取数据
+        - 头文件：#include<unistd.h>
+        - 函数定义
+            - ssize_t read(int fd , void * buf, size_t count);
+                - fd：文件描述符
+                - buf：内容读取到哪个缓冲区
+                - count：请求读取的字节数，读上来的数据保存在缓冲区buf中，同时文件的当前读写位置向后移
+        - 返回值：成功返回读取的字节数，出错返回-1并设置errno，如果在调read之前已经到达文件末尾，则这次返回0
+    -  write函数
+        - 功能：向打开的设备或文件中写数据
+        - 头文件：#include<unistd.h>
+        - 函数定义
+            - ssize_t write(int fd , const void * buf , size_t count);
+        - 返回值
+            - 成功返回写入的字节数，出错返回-1并设置errno
+    - errno错误码
+        - pritnf("%d",errno);
+            - 打印出错误码
+        - perror函数
+            - 功能：输出文本并显示错误码原因
+                - errno是全局变量，出错误时，先给errno赋值；
+                - 执行perror函数，会根据errno的值找到对应的错误信息并打印
+            - perror("open fail");
+        - strerror函数
+            - 功能：输出文本并显示是错误原因
+            - 头文件：#include<string.h>
+            - 函数定义
+                - char* strerror(int errnum);
+            - printf("open fail : %s\n", strerror(errno) );
+    - 阻塞和非阻塞
+        - 
+        - 阻塞读终端
+            - \#include<sys/stat.h> #include<sys/types.h> #include<fcntl.h> #include<unistd.h> int main() {    char buf[10];    int nlen = read(STDIN_FILENO , buf , sizeof(buf) );    write(STDOUT_FILENO , buf , nlen);    return 0; }
+                - 
+                - 
+        - 非阻塞读终端
+            - 
+    - fcntl函数
+        - 功能：改变一个已打开的文件的属性，可以重新设置读，写，追加，非阻塞等标志（这些标志称为File Status Flag），而不必重新open文件
+        - 头文件
+            - \#include<unistd.h>
+            - \#include<fcntl.h>
+        - 函数定义
+            - int fcntl(int fd , int cmd ); int fcntl(int fd , int cmd , long arg); int fcntl(int fd , int cmd , struct flock * lock);
+                - cmd：命令
+                    - F_SETFL
+                        - 设置文件描述符的标志位
+                    - F_GETFL
+                        - 获取文件描述符的标志位
+                - arg：文件描述符的标志位
+        - 返回值：失败返回-1
+        - 例子：先获取文件描述符的标志位，然后再给文件描述符重新设置标志位
+            - \#include<stdio.h> #include<unistd.h> #include<errno.h> #include<fcntl.h> int main() {    // 获取标准出入文件的现有属性    int flags = fcntl(STDIN_FILENO,F_GETFL);    // 在现有属性的基础上增加非阻塞    flags = flags | O_NONBLOCK;    //把属性重新设置到标准输入文件上    fcntl(STDIN_FILENO,F_SETFL,flags);    //循环读取标准输入文件    int nLen = 0;    char buf[1024] = "";     while(1)    {           nLen = read(STDIN_FILENO,buf,10);        //判断返回值是否是-1        if(-1 == nLen){            //判断errno是否是EAGAIN            if(EAGAIN == errno){                //当前没有读取到数据，休眠一会，在继续                sleep(5);            }else{                //读取出错，打印错误日志，结束程序                perror("read fail");            }        }else{            //读取到数据，就把数据写入标准输出文件中，结束程序            write(STDOUT_FILENO,buf,nLen);            return 0;        }    }           return 0; }
+    - 最大打开文件个数
+        - cat /pro/sys/fs/file-max
+            - 查看当前系统允许最大打开文件个数（在这个文件里面修改以后永久有效）
+        - ulimit -a
+            - 查看当前系统允许最大打开文件个数，默认个数1024
+        - ulimit -n 4096
+            - 修改默认设置最大打开文件个数为4096（命令修改临时有效，重启系统后失效）
+        - 循环打开文件到不能打开为止：新建文件夹写代码，因为要生成好多文件
+            - \#include <sys/types.h> #include <sys/stat.h> #include <fcntl.h> #include <errno.h> #include <stdio.h> #include <unistd.h> #include <stdlib.h> #include <string.h>  int main() {    int i = 0;    umask(0002);    char filename[1024];    int err;    while(1) {        sprintf(filename,"file%d",i);        err = open(filename , O_CREAT , 0666);        if(-1 == err) {            perror("open fail");            printf("%d\n",i);            exit(1);        }        i++;    }       return 0; }
+    - lseek函数
+        - 功能：和标准I/O库fseek函数类似，可以当作移动当前读写位置（偏移量）（f_pos）
+        - 头文件
+            - \#include<sys/types.h> #include<unistd.h>
+        - 函数定义
+            - off_t lseek(int fd , off_t offset ,  int whence)
+        - 返回值:若lseek成功执行，则返回新的偏移量，因此可用以下方法确定一个打开文件的当前偏移量
+        - 把光标移动到文件尾 int size = lseek(fd,0,SEEK_END); 打印文件大小（返回值就是文件大小） printf("file size = %d\n",size);
+        - 4把光标移动到文件开头后100个字节     lseek(fd,100,SEEK_SET);
+- Linux文件系统
+    - 文件系统的概念
+        - 
+    - 扇区
+        - 磁盘上划分的区域。磁盘上的每个磁道被等分为若干个弧段，这些弧段便是磁盘的扇区，硬盘的读写以扇区为基本单位
+            - 每个扇区的大小是512字节
+    - 文件在磁盘中存储
+        - 文件名
+        - 起始位置
+            - 文件实际存储在磁盘中的地址
+        - 文件大小
+    - 分块存储
+        - 把文件分成跟多块去存储，可以存储在磁盘中的不同位置，不是必须要连续的空间。然后存储文件信息的时候增加一些指针，指向这些文件块。如果文件增加，就在给这个文件分配一块磁盘，增加一个指向这块磁盘地址的指针
+    - ext2文件系统
+        - 一个磁盘可以划分成多个分区，每个分区必须先用格式化工具格式化成某种格式的文件系统，然后才能存储文件，格式化的过程会在磁盘上写一些管理存储布局的信息
+        - 文件系统中存储的最小单位是块（Block），块的大小是在格式化的时候确定的，。默认4kb。每个块内存中的内容不一样，把存储不同内容的块组合到一起形成一个块组（Block Group）
+        - 启动块（Boot Block）
+            - 大小确定为1Kb，启动块是由PC标准规定的，用来存储磁盘分区信息和启动信息，任何文件系统都不能使用启动块。启动块用来存储磁盘分了多少个分区
+        - 启动块之后是ext2文件系统的的开始，ext2文件系统将整个分区划分成若干个同样大小的块组。使用stat 文件路径查看块大小
+        - 
+        - 以一个块组为例
+            - 包含六个部分
+                - 超级块，GDT(块组描述符表)，块位图，inode位图，inode表，data block（数据块）
+                - 超级块
+                    - 主要存储的是块大小，文件系统版本号，上次挂在的时间
+                - GDT
+                    - 不确定大小，可能由很多个块组成。描述的是第几个块开始是block bitmap，第几个开始是inode bitmap，第几个开始是inode table，第几个块开始是data block和空闲块，空闲inode有多少
+                        - 标记了每一种块的起始位置
+                - 块位图（block bitmap）
+                    - 每个bit位标识每个块是否被使用，标识的块，被使用为1，没有为0
+                - inode位图（inode bitmap）
+                    - 用每个bit标识inode是否被使用过。indoe就是用来存储文件类型（常规，目录，符号），权限，文件大小，创建/修改/访问时间，ls -l命令可以产看到的信息
+                - indoe表（inode table）
+                    - 一系列的inode存储在一起，形成了一个inode table。每个inode 128字节，1block可以存储32个inode。每个inode中存的是文件属性和文件块指针，文件块指针有60个字节，可以存15个指针
+                - data block（数据块）
+                    - 数据块表，一系列数据块存储在一起形成的表，数据块可能由多block组成
+            - 块位图是1个block，有32768位，每个位都为当前block group中的每个是否被使用。1个block是4k，那么一个块组的大小就是 32768 * 4k = 131072K = 128M
+            - 同里，indoe位图也是一个block，有32768位，每一位都代表一个inode节点是否被使用。1个indoe节点是128字节，indoe table的大小 = 32768 * 128 字节 = 419430字节 = 4096k = 1024个block
+        - 存储/读取文件例子
+            - 存储一个a文件，内容为hello，在文件系统中是怎么存储的
+                - 首先看Boot Block看磁盘分区，找到要存储的磁盘
+                - 来到具体的磁盘的block group，可以直接跳过超级块
+                - 到GDT表里面，从GDT表中读取块位图，inode位图，inode table 和 data block 的起始位置
+                - 通过inode位图找到空闲的inode节点，写入文件属性
+                - 通过块位图找到空闲的data block，向空闲的data block中写入文件内容“hello”，并把data block的地址赋值给写入文件属性的那个inode节点
+            - 读取a文件的内容，学要知道一个前提时inode节点编号
+                - 首先看Boot block磁盘分区，找到要存储的磁盘
+                - 来到具体的磁盘里的block group，通过inode节点的编号，找到对应的节点，读取出里面的文件属性，和数据块指针
+                - 根据数据块指针，到对应的数据块的位置读取出文件的内容
+        - 数据块寻址
+            - 一个inode节点中的数据块指针有60字节，可以存15个地址指针，一个地址是4k，一个文件大小就是60k。这太小
+                - 15个指针并不是所有都指向数据块，前面12个是指向数据块的，block[12]叫一级间接寻址指针，block[13]叫二级间接寻址指针，block[14]叫三级间接寻址指针
+                - 一级间接寻址指针
+                    - 不存数据，存寻址指针，这些指针指向的是实际存储数据的块的地址，可以存1024个地址，每个指向4k的block，呢么可以存出1024*4K = 4096K = 4M大小的文件
+                - 二级间接寻址指针
+                    - 这4M也是存地址，1024*1024*4K = 4G
+                - 三级间接地址寻址
+                    - 4G存地址，1024*1024*1024*4K = 4T
+        - 删除文件操作
+            - 过程
+                - 通过stat文件可以查看某个文件的inode编号
+                - 指导文件的inode编号后，先去GDT找到inode  table的起始位置，通过换算，找到inode节点地址，读取文件属性，和数据块指针，接下来进行删除操作
+                - 先把inode bitmap对应位置置0
+                - 通过读取道德数据块指针计算出数据块在位图中的位置，把块位图中对应的位置置0，相当于把存数据的data blocl释放掉了
+                - 把inode节点中的数据块指针清掉
+            - 从删除操作可以看出，data block里面存储的数据实际上并没有被删除掉，数据还在原来的位置存着呢，所以数据就有可能被恢复回来
+            - 这也是拷贝数据的时候时间长，删除数据瞬间就可以完成
+                - 因为删除数据，只是重置了inode bitmap和block bitmap
+            - 想要删除干净就用其他文件覆盖掉原来的data block
+        - 文件名和目录存储
+            - 记录项
+                - 每个文件夹都有一个对应的文件去存储这个文件夹的信息和文件里面所有文件的相关信息
+                    - 所以创建一个空的文件夹，文件夹的大小都是4K
+                - 包括
+                    - 文件名，inode号，文件类型，记录长度
+                        - 根据这个inode号就可以在inode table里面找到对应的文件属性和数据块指针，进而进行读写删除操作
+    - 文件系统函数
+        - stat
+            - 
+            - 功能：用来获取文件Inode里主要信息，stat跟踪那个符号链接，lstat不跟踪符号链接
+            - 头文件
+                - \#include<sys/types.h> #include<sys.stat.h> #include <unistd.h>
+            - 函数定义
+                - int stat(const char* path , struct stat* buf); int fstat(int fd , struct stat* buf); int lstat(const char* path , struct stat * buf);
+                    - path：文件路径
+                    - fd：文件标识符
+                    - stat
+                        - 
+                        - 
+                - 区别
+                    - stat，fstat检索到的内容相同，只有参数不同。lstat函数如果path是符号链接，则它返回有关链接本身的信息，而不是它所引用的的文件
+                - 例子
+                    - 获取文件大小
+                        - \#include<stdio.h> #include<sys/types.h> #include<sys/stat.h> #include<unistd.h> int main(){    struct stat st;     if((stat("yy",&st)) < 0){         perror("stat fail");        return 1;    }       printf("size=%d,ino=%d\n",st.st_size,st.st_ino);        if((lstat("yy",&st)) < 0){         perror("stat fail");        return 1;    }       printf("size=%d,ino=%d\n",st.st_size,st.st_ino); }
+            - 返回值
+                - 成功0
+                - 错-1，有errno
+        - access
+            - 功能
+                - 检查调用进程是否可以访问文件路径名。跟踪符号链接
+            - 头文件
+                - \#include<unistd.h>
+            - 函数定义
+                - int access(const char* pathname , int mode);
+                    - pathname：文件路径
+                    - mode
+                        -  R_OK
+                            - 是否有读权限
+                        - W_OK
+                            - 是否有写权限
+                        - X_OK
+                            - 是否有执行劝权限
+                        - F_OK
+                            - 测试一个文件是否存在
+            - 返回值
+                - 成功0
+                - fail：-1，有errno
+            - 当软链接链接的文件不存在时，显示不存在
+        - chmod
+            - 功能：更改文件的权限
+            - 头文件：#include<sys/stat.h>
+            - 函数定义
+                - int chmod(cosnt* path , mode_t mode): int fchmod(int fd , mode_t mode);
+                    - path：文件路径
+                    - mode：文件权限，十进制（可以把八进制转化成十进制）
+                        - 0666->433
+                        - 也可以使用标志位
+                            - 
+                            - 前三位不常用
+            - 返回值
+                - 成功：0
+                - fail：-1，errno
+        - chown
+            - 功能：更改文件的所有者和组。chown使用时必须拥有root权限
+            - 头文件
+                - \#include<unistd.h>
+            - 函数定义
+                - int chown(const char* path , uid_t owner , gid_t group); int fchown(int fd , uid_t owner  , gid_t group); int lchown(const char* path , uid_t owner , gid_t group);
+                    - owner:用户id
+                    - group：组id
+            - 返回值
+                - 成功：0
+                - 失败：-1，errno
+        - utime
+            - 功能：将filename指定的inode的访问和修改时间分别更改为actime，modetime字段（开发服务器，下订单的时候每个订单都是一个文件，创建和修改订单的时候使用这个函数）
+            - 头文件
+                - \#include<sys/types.h> #include<utime.h>
+            - 函数定义
+                - int utime(const char* filename , const struct utimbuf* times);
+                    - 
+            - 返回值
+                - 成功：0
+                - 失败：-1,errno
+        - truncate
+            - 功能：将path命名或由fd引用的常规文件被截断为精确长度字节的大小。如果文件此前大于此大小，则多余的数据将丢失。如果文件先前较短，则将其扩展，扩展部分为空字节（'\0'）
+            - 头文件
+                - \#include<unistd,h> #include<sys/types.h>
+            - 函数定义
+                - int truncate(const char* path , off_length); int ftruncate(int fd , off_t length);
+            - 返回值
+                - 成功：0
+                - 失败：-1，errno
+        - 硬链接和源文件的inode编号一样，两个文件使用的是同一个inode
+        - link
+            - 功能：创建一个硬链接。当rm删除文件时，只是删除了目录下的记录项和把inode硬链接计数减1，当硬链接计数减为0时，才会正真的删除文件
+            - 头文件
+                - \#include<unistd.h>
+            - 函数定义
+                - int lint(const char* oldpath , const char* newpath);
+            - 返回值
+                - 成功：0
+                - 失败：-1，errno
+            - 注意
+                - 
+        - symlink
+            - 功能：创建一个符号链接，其中包含字符串目标
+            - 头文件
+                - \#include<unistd.h>
+            - 函数定义
+                - int symlink(const char* oldpath , const char* newpath);
+            - 返回值
+                - 成功：0
+                - 失败：-1,errno
+        - readlink
+            - 功能：读符号链接所指向的文件名字，不读文件按内容
+            - 头文件
+                - \#include<unistd.h>
+            - 函数定义
+                - ssize_t readlink(const char* path , char* buf ,size_t bufsize);
+                    - buf：存放文件名的缓冲区
+                    - bufsize：缓冲区大小
+            - 返回值
+                - 成功：返回buf中字节数
+                - 失败：-1，erno
+        - unlink
+            - 功能：1. 如果是符号链接，删除符号链接  2. 如果是硬链接，硬链接数减1，当减为0时，释放数据块和inode  3. 如果文件硬链接数为0，但有进程已打开该文件，并持有文件描述符，则等该进程关闭该文件时，才真正 去删除该文件  4. 利用该特性创建临时文件，先open或creat创建一个文件，马上unlink此文件
+                - 
+            - 头文件
+                - \#include<unistd.h>
+            - 函数定义
+                - int unlink(const char *pathname)
+            - 返回值
+                - 成功：0
+                - 失败：-1，errno
+        - rename
+            - 功能：文件重命名
+            - 头文件
+                - \#include <stdio.h> 
+            - 函数定义
+                - int rename(const char *oldpath, const char *newpath);
+            - 返回值
+                - 成功：0
+                - 失败：-1，errno
+        - chdir
+            - 功能：改变当前进程的工作目录
+            - 头文件
+                - \#include <unistd.h>
+            - 函数定义
+                - int chdir(const char *path);  int fchdir(int fd);
+            - 返回值
+                - 成功：0
+                - 失败：-1，errno
+        - getcd
+            - 功能：获取当前进程的工作目录
+            - 头文件
+                - \#include <unistd.h> 
+            - 函数定义
+                - char *getcwd(char *buf, size_t size);
+            - 返回值
+                - 写完的buf的首地址
+        - pathconf
+            - 功能：获取文件路径的配置选项名称的值
+            - 头文件
+                - \#include <unistd.h>
+            - 函数定义
+                - long fpathconf(int fd, int name);  long pathconf(char *path, int name);
+                    - 
+                    - name：获取配置项的名称
+            - 返回值
+                - 
+        - mkdir
+            - 功能：创建目录
+            - 头文件
+                - \#include <sys/stat.h>  #include <sys/types.h>
+            - 函数定义
+                - int mkdir(const char *pathname, mode_t mode);
+            - 返回值
+                - 成功：0
+                - 失败：-1，errno
+        - rmdir
+            - 功能：删除目录
+            - 头文件
+                - 
+            - 函数定义
+                - int rmdir(const char *pathname);
+            - 返回值
+                - 成功：0
+                - 失败：-1，errno
+        - opendir/fdopendir
+            - 功能：打开目录
+            - 头文件
+                - \#include <sys/types.h>  #include <dirent.h>
+            - 函数定义
+                - DIR *opendir(const char *name);  DIR *fdopendir(int fd);
+            - 返回值
+                - DIR* 目录指针，指向目录文件中的记录项
+        - readdir
+            - 功能：读取目录。每次返回一条记录项，DIR*指针指向下一条记录项
+            - 头文件
+                - \#include <dirent.h>
+            - 函数定义
+                - struct dirent *readdir(DIR *dirp);
+                    - struct dirent {  ino_t d_ino;                            /* inode number */  off_t d_off;                              /* offset to the next dirent */  unsigned short d_reclen;     /* length of this record */  unsigned char d_type;          /* type of file; not supported by all file system types */  char d_name[256];                /* filename */  };
+                    - 调用opendir/fdopenr时返回的指针
+            - 返回值
+                - 每次返回记录项中的内容，返回为null时，读完
+        - rewinddir
+            - 功能：把目录指针恢复到目录的起始位置
+            - 头文件
+                - \#include <sys/types.h> #include <dirent.h>
+            - 函数定义
+                - void rewinddir(DIR *dirp);
+                    - 调用opendir/fdopenr时返回的指针
+            - 返回值
+                - 无
+        - telldir/seekdir
+            - 功能：telldir()函数返回与目录流drip关联的位置 seekdir()函数设置目录流中的位置
+            - \#include <dirent.h> 
+                - long telldir(DIR *dirp)
+                    - 成功目录流中的当前位置
+                    - 出错：-1，errno
+                - void seekdir(DIR *dirp, long offset);
+                    - 调用opendir/fdopenr时返回的指针
+                    - offset：偏移量
+        - closedir
+            - 功能：关闭目录
+            - 头文件
+                - \#include <sys/types.h>  #include <dirent.h> 
+            - int closedir(DIR *dirp);
+                - 调用opendir/fdopenr时返回的指针
+            - 返回值
+                - 成功：0
+                - 失败：-1，errno
+    - 虚拟文件系统
+        - 为什么需要
+            - 
+            - 
+        - dup/dup2
+            -  功能：都可以用来复制一个现存的文件描述符，使两个文件描述符指向同一个file结构体。
+            - \#include<unistd.h>
+            - int dup(int oldfd); int dup2(int old ,k int newfd);
+                - oldfd
+                    - 想要复制的文件描述符
+                - 想要与oldfd指向相同file结构体的新的文件描述符。如果指定的新的文件描述符是正在使用，系统会把新的文件描述符正在使用的文件关闭，然后把新的描述符指向根oldfd指向相同file结构体
+            - 返回值：成功后，这些系统调用会返回新的描述符。出错：-1，errno
+
+# GitHub
+
+- 许可证
+    - MIT，GPL3.0，Apache2.0，给用户最小的限制以及最大的权限
+- 搜索关键词
+    - awesome（有趣的内容），sample（样本，示例），tutorial（资料）
+    - Git软件，分布式版本控制系统
+        - 通过git软件，访问云端仓库的工程，可以更新迭代，修改数据，提交代码
+- GitHub三要素
+    - 仓库：是项目的基本单元 ，一个仓库中一般保存一个项目，但是用户可以有多个仓库
+    - 提交：每次用户在上传代码之气都要进行提交的操作，便于用户快速回溯代码，可以快速整理出项目的开发逻辑和流程
+    - 分支：分支是比仓库小一级别的存储单元，一个仓库可以有多个分支，默认派生分支master/main
+- 从本地文件存储到云端仓库
+    - 
+- 进行关联设置，让本地设备与gitHub账号关联
+    - ssh -T git@github.com#测试本机是否与账号关联
+    - get init#创建本地仓库，为隐藏文件夹，最好将仓库创建在某个文件夹中，便于可见
+    - git config --list#查看git软件的配置文件
+    - git config --global key value #user.name user.email
+    - ssh-keygen -t rsa -C 邮箱#生成rsa非对称密钥和设备序列号
+        - 复制本地 .pub文件中的密钥串 而后粘贴到github网站账号中
+- git remote add origin 地址#为云端仓库地址创建别名
+- git remote remove origin#删除地址别名
+- git status#查看本地仓库状态
+- git add files #将文件或目录添加本地仓库
+- git commit -m “备注” #将数据提交到本地仓库
+- git push origin master#将本地仓库推到云端
+- git pull --rebase origin master #拉取云端内容与本地合并
+- git restore name #复位数据
+- git rm name#删除本地仓库数据
+- git clone 仓库地址（https）将云端的代码下载到本地
+
+
+
+# 第四阶段
+
+### GitHub
+
+- 许可证
+    - MIT，GPL3.0，Apache2.0，给用户最小的限制以及最大的权限
+- 搜索关键词
+    - awesome（有趣的内容），sample（样本，示例），tutorial（资料）
+    - Git软件，分布式版本控制系统
+        - 通过git软件，访问云端仓库的工程，可以更新迭代，修改数据，提交代码
+- GitHub三要素
+    - 仓库：是项目的基本单元 ，一个仓库中一般保存一个项目，但是用户可以有多个仓库
+    - 提交：每次用户在上传代码之气都要进行提交的操作，便于用户快速回溯代码，可以快速整理出项目的开发逻辑和流程
+    - 分支：分支是比仓库小一级别的存储单元，一个仓库可以有多个分支，默认派生分支master/main
+- 从本地文件存储到云端仓库
+    - 
+- 进行关联设置，让本地设备与gitHub账号关联
+    - ssh -T git@github.com#测试本机是否与账号关联
+    - get init#创建本地仓库，为隐藏文件夹，最好将仓库创建在某个文件夹中，便于可见
+    - git config --list#查看git软件的配置文件
+    - git config --global key value #user.name user.email
+    - ssh-keygen -t rsa -C 邮箱#生成rsa非对称密钥和设备序列号
+        - 复制本地 .pub文件中的密钥串 而后粘贴到github网站账号中
+- git remote add origin 地址#为云端仓库地址创建别名
+- git remote remove origin#删除地址别名
+- git status#查看本地仓库状态
+- git add files #将文件或目录添加本地仓库
+- git commit -m “备注” #将数据提交到本地仓库
+- git push origin master#将本地仓库推到云端
+- git pull --rebase origin master #拉取云端内容与本地合并
+- git restore name #复位数据
+- git rm name#删除本地仓库数据
+- git clone 仓库地址（https）将云端的代码下载到本地
+- 
+
+- markdown
+    - \# 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ##正文 正文内容 正文内容 正文内容 空行表示换行<br> *这是一段斜体字符串* **粗体** ***粗斜体*** ~~下划线~~ 这是一段描述信息但是`关键字`被凸显
+    - 
+    - 
+- linux中：printf需要\n,刷新缓冲区，否则没有输出，windows自动刷新
+
+### 正则
+
+- 正则技术：利用贪心算法，完成数据的快速过滤匹配提取数据，经典数据模糊查询方法 各个语言都支持正则
+- 正则语句（正则表达式）
+    - 一条由若干哥特殊符号构成的长字符串（描述数据特征的字符串）
+- 正则是一种模糊匹配技术，数据规则越明确 这个正则越简单
+- 可以使用正则的命令
+    - grep
+    - awk
+    - sed
+- 正则元字符
+    - \
+        - 转义字符
+    - *
+        - 以前一个表达式为参照表示该表达式出现了0次或多次
+    - +
+        - 以前一个表达式为参照表示该表达式出现了1次或多次 转义
+    - .
+        - 表示任意一个字符一次，无需参照物
+    - ?
+        - 表示任意一个字符0次或1次
+    - ^
+        - 以后一个表达式为参照，该表达式为行首字符
+    - $
+        - 以前一个表达式为参照表示 行尾字符
+    - []
+        - 表达式集合 ，表示集合中任意一个字符 自带逻辑或
+            - [a-z][A-Z][0-9][a-zA-Z0-9]
+    - ()
+        - *表达式的颗粒度一般以字符为单位 但是可以使用()将若干个表达式变为一个整体（词集合）转义
+    - {}
+        - a{2}，以前一个字符为参照 表示该字符连续的频率，a{2,3} ，a{2, }指定出现连续的频率和范围，先看最大频率而后递减 转义
+- 贪婪与非贪婪模式
+    - 贪婪模式速度快，但是匹配精度不高 无法矫正（不可回溯）
+        - .*或.+表示贪婪模式
+    - 非贪婪模式匹配一个结果立即返回 需要重复匹配
+        - ?如果出现在*或+后面表示切换为非贪婪模式，匹配一个结果立即返回
+- 代码使用正则表达式
+    - \#include<regex.h>
+    - regex_t reg;正则类型
+        - 使用字符串表达式生成正则类型后，后续使用正则类型匹配数据
+    - regcomp(®,"字符串正则语句",0);使用你字符串正则语句生成正则类型
+    - refree(®);使用完释放正则类型
+    - regexec(®,void*data,正则数量，传出位置数组，0);每次匹配一条结果而后返回
+    - （）可以创建子表达式（正则数量）
+    - 成功返回0，失败返回REG_NOMATCH(表示没有结果了)
+    - 传出数组类型位regmatch_t，数组长度位为正则数量，Ma..rm_so表示起始位置，Ma_rm_eo表示结束位置
+
+### 进程process
+
+- 单任务操作系统
+    - 单进程模式，受硬件限制，一个时刻只能执行一种任务，此任务会耗尽系统资源
+    - 通过swp技术将占用的系统资源释放，执行新的任务
+- 需要让电脑多个执行单位合理共享使用硬件资源，这也是多任务操作系统的前提
+- 进程
+    - 是操作系统基本的执行个单元，也是调度单位，占用系统资源完成特定任务
+        - 最小的资源分配单位
+        - 线程是最小的调度单位
+- 程序与进程
+    - 程序文件包含程序启动信息，和配置信息，存储在电脑磁盘中的静态数据程序是进程的静态表现
+    - 程序运行后为进程，执行逻辑单位，像微信提供ui服务，聊天朋友圈等基础服务
+        - 如果进程执行的时候没有回访文件数据 那么这些文件数据都可以删除 程序文件与进程没有必然联系
+        - 可执行文件启动后创建进程
+        - 进程是程序的动态表现，进程创建后占用系统资源，完成特定任务
+- 进程的生存环境
+    - 系统给进程分配一定的内存空间给进程有： 32位系统（分配的内存是虚拟内存） 用户层，内核层 0-2，2-4G 0-3，3-4G 64位 0-8T，8-16T
+        - 内核层（系统层）：存储进程（身份）信息
+            - PCB（进程控制块）包含了384项进程信息，其中pid是进程pid操作系统唯一的进程身份标识
+                - 内核层访问需要权限，用户不能访问，只有操作系统访问，将pcb存在一起方便系统管理
+                - 内核空间的映射内存是共享内存
+        - 用户层：存储进程业务逻辑与任务数据
+            - 命令行参数（int argc char**argv） 环境变量（系统默认） 栈 库 堆 DATA（已初始化的全局变量静态变量） BSS   （未初始化的全局数据） Text   代码段   printf
+                - 内存资源有限且珍贵，允许多个进程使用，但是不允许共用（同时占有和访问）
+                - 用户层的映射空间是独立内存
+        - 每个进程通过映射方式访问物理内存 可以后续通过交换机制将限制内存给别人使用，最大换利用内存呢
+        - 每个进程执行时候拥有独立的物理内存 进程资源独享
+        - 内存管理器->虚拟内存映射表
+        - 虚拟内存概念 可以避免用户直接访问物理内存
+- 内存
+    - 基本单位为Page页，一般默认4K，一页为4096字节
+    - 四种内存的基本权限
+        - PROT_READ(读) ，PROT_WRITE(写) PROT_EXEC(执行)，PROT_NONE(无)
+    - 32位操作系统内存申请时采用3级间接寻页（GB），64位采用4级(TB)
+    - 系统中复杂的映射关系存储在虚拟内存映射表中，内部管理器会负责为去维权和修改
+- 保存与恢复处理器现场
+    - 当进程进行切换时，进程切换前触发保存现场，将进程运算过程存储在现场中
+        - 存储位置为内核栈中，PCB中内核栈指针指向该位置
+    - 再次得到时间片，回复处理器现场，这样保证再多的进程共享寄存器也不会引发异常
+    - 分时复用原则结合保存恢复现场，是一个合格的多任务系统
+    - 进程和线程就是寄存器和栈
+- linux下的进程状态
+    - 就绪态
+    - 运行态
+    - 挂起态
+    - 阻塞态
+    - 终止态
+    - 僵尸态
+    - 孤儿态
+- 内核层与用户层
+    - cpu访问权限不同
+    - 用户层访问一些资源处处受限
+    - 内核层最高访问权限
+- 进程原语(操作系统提供一系列系统函数接口 让用户完成金进程开发)
+    - fork()
+        - 进程创建，调用一次创建一个进程
+        - pid_t fork(void)
+        - 父进程调用fork创建子进程，两者为亲缘关系
+        - 几乎所有的进程都能找到其父进程，除了init根进程，是系统的1号进程，所有系统下的进程都是他的子集
+        - 强亲缘关系 子进程从被创建直到进程结束 父进程全程参与 如果是多级别的父子进程那么具备一定的亲缘关系（继承）
+        - 父进程从代码的起始位置执行到末尾，子进程从fork之后执行到末尾
+        - 返回值：调用fork成功后，在父进程中返回子进程的pid，在子进程中返回0，如果创建失败返回-1
+            - 可以这么理解，但不完全对，看下面，子进程走fork
+        - 关于父子进程一起执行fork函数
+            - 
+            - fork分两步，显示创建一个子进程，这个子进程是空的，此时为新生态进程，不能执行。第二部，克隆，将父进程的内存空间克隆过去，并且父子进程共享fork函数栈帧，父进程第一次返回拿走子进程pid返回值，继续执行下面的代码，此时子进程有了具体代码，并且因为这个函数栈帧共享，子进程在这个返回值的后一行开始执行最后返回零
+                - 父子进程可以共享fork函数栈帧，一人执行函数的一部分，得到两个不同的返回值，便于区分父子进程任务
+        - 不允许子进程踏出自己的工作区（else if代码块），子进程执行完自己的代码块通过exit()结束进程
+        - getpid()
+            - 返回调用进程的pid
+        - getppid()
+            - 返回调用进程父亲的pid
+        - 父子进程的继承与拷贝
+            - 内核层中部分PCB拷贝，生成自己的pid等
+            - 用户层拷贝
+                - 第一版本fork 采用拷贝继承
+                    - 全部用户层资源拷贝，父进程拷贝资源是强制的 如果子进程无需使用父进程资源，这个拷贝开销变得毫无意义
+                - 第二版本vfork函数 
+                    - 使用vfork不会产生用户层拷贝开销，一切需要结合execl函数使用
+                - 第三版本fork，读时共享，写时复制（父子写时都触发）
+                    - 在子进程用户层进行映射内存，通过映射内存可以访问父进程用户层数据（只读）
+                        - 内存共享，逻辑独立
+                    - 子进程尝试修改映射内存指向的内容，触发写时复制
+                        - 将子进程尝试修改的数据拷贝到子进程即可
+        - 多次执行fork创建子进程时，创建的数量为2^n-1
+        - 
+            - 一共创建了多少个
+                - 19个
+                - 先看中将行，先执行第一个，变为两个一个放回大于零，另一个为零，大于零的执行第二个，等于零的执行第三个，等于零的执行完了变两个，然后大于零的执行第二个现在就有四个线程了，这两个有一个返回大于零，因此第三个不执行了，另一个执行，一变2，现在有五个
+                - 说明执行第二行能一变五，现在执行第一行有俩，执行第二行，有十个，第三行二十个，减去原本的，创建了19个
+    - execl()：进程重载
+        - 重载可以复制其他进程功能，无需对程序进行代码实现，重载即可
+        - 重载你是用目标将用户层强制覆盖，重载成功后子进程后续的代码不会继续执行 因为被覆盖掉了，最终程序结束是在重载程序中的代码段中结束
+        - execl(pathname,argv[1],argv[2],......,NULL);
+            - pathname为重载的路径+重载文件名
+            - 后面为命令行参数，并且必须NULL结尾
+        - 如果子程序想要执行自己的定义代码，需要fork之后execl之前
+        - 重载即可重载系统命令，也可重载用户自定义程序
+        - execl可以便于功能扩展，使用极少的代价重载使用复杂功能
+        - 可以实现主程序不动的情况下，动态迭代只需要让主程序定时重载即可
+    - wait()：进程回收
+        - 僵尸进程
+            - 进程结束后需要对其进行回收，否则该进程会称为僵尸进程，引发内存泄露（PCB未被释放，导致内存泄露）
+            - 进程结束调用exit(0)函数，用户层内存空间被系统完全释放，释放部分内核空间，但是会残留PCB导致内存泄漏
+            - linux或Unix系统中，子进程只能由父进程回收
+            - 危害
+                - 内存泄漏，进程结束后内存没有释放完毕，其他人使用此内存产生异常
+                - 每个僵尸进程会持续占用一个PCB，影响新进程创建与使用
+        - \#inlcude <sys/wait.h>
+        - pid_t wait(int* status);
+            - 参数为传出参数，可以传出子进程的退出原因便于后续验尸处理，如果传NULL表示不关心
+        - wait函数是阻塞回收函数，等子进程结束后立即回收，它可以回收任意一个子进程，每次回收一个僵尸进程
+            - 调用一次只回收一个僵尸进程，如果有多个循环回收
+        - 成功返回僵尸进程的pid
+        - 返回-1，表示回收失败，列如：没有子进程尝试回收
+        - 子进程成为僵尸进程，父进程退出后，系统会回收僵尸进程
+        - wait函数，阻塞回收子进程（僵尸进程），主动回收方案，阻塞回收会影响父进程任务的执行，在等待过程中无法进行其他操作
+    - waitpid()：进程回收
+        - pid_t  waitpid(pid_t pid , int* status,int opt);
+        - pid，指定回收方式
+            - pid > 0
+                - 指定任意一个子进程pid，回收这个子进程
+            - -1
+                - 回收任意子进程
+            - 0
+                - 同组回收，只能回收掉与父进程同组的所有子进程
+            -  pid < -1
+                - 指定组id，实现跨组回收
+        - opt，工作模式
+            - WNOHANG，非阻塞关键字，可以让waitpid进行非阻塞回收
+            - 非阻塞回收，可以让父进程在回收过程中穿插执行自身的任务
+        - 返回值
+            - \>0表示回收成功
+            - -1表示回收失败
+            - 非阻塞返回0
+        - 非阻塞回收也是经典的主动回收模式
+        - status
+            - wait再回收PCB之前可以获取到进程退出信息，通过status参数传出，校验推出信息，判断子进程退出原因
+            - 正常退出exit or return
+                - WIFEXITED(status)
+                    - 判断是否为正常退出
+                        - 获取打印退出码或返回值
+                            - exitcode or return value = WEXITSTATUS(status);
+            - 异常退出：被其他进程利用信号杀死
+                - WIFSIGNALED(status)
+                    - 判断是否是异常退出
+                        - 获取打印杀死子进程的信号编号
+                            - signo = WTERMSIG(status);
+
+
+### 进程通信IPC
+
+- ipc：进程间通信，可以利用这种技术完成多个进程间的数据传递，信息收发
+    - 不属于网络通信范围，不走网卡
+- 进程间通信技术有
+    - 匿名管道（pipe）
+    - 有名管道（fifo）
+    - Posix消息队列
+    - SystemV消息队列
+    - MMAP内存共享映射
+    - Signal信号
+    - Socket套接字技术
+- 绝大多数进程间通信技术都是通过内核层实现的，是通过内核层内存空间共享实现的
+
+#### 匿名管道（PIPE）
+
+- 
+- 管道性质（匿名，有名）
+    - 流通性（传输介质）
+    - 方向性
+    - 暂存能力
+- int fds[2]; pipe(fds);
+- 原理
+    - 当调用pipe(fds)后，会在内核层CREAT一个环形队列管道缓冲区，大小为4K，老版本Ubuntu管道大小都是64K
+    - 队列：先进先出，有暂存能力
+    - 管道创建成功，系统将读写管道的两个描述符传出到fds，让用户可以读写使用管道
+        - fds[0]:读端
+            - 从管道中读内容
+        - fds[1]:写端
+            - 向管道中写内容
+- 匿名管道具有亲缘限制，只有亲缘进程间可以利用完成进程通信
+- 管道使用之前要确定通信方式（谁读谁写），管道要单工使用，让进程关闭无用的描述符
+    - 单工，定义通信方向，不可改变，非读既写
+    - 半双工（可调节单工），在一个时刻非读既写，不同时刻可切换
+    - 全双工，可以同时读写
+- 每一个指向管道的描述符都是一个引用计数，当管道引用计数为0，系统会自行释放管道空间
+    - close函数可以将引用计数 -1
+    - shutdown可以将引用计数直接归0，但是程序推出前才能使用
+- 通过write和read读写管道
+    - write(fds[1],buf,strlen(buf));
+    - read(fds[0],buf,sizeof(buf));
+- 普遍情况（适用大部分情况像sock）
+    - 管道为空，写端未写数据，读端读管道，读阻塞
+    - 管道为满，读端未读数据，写端写管道，写阻塞
+    - 写端关闭，如果管道有数据，读端读取完管道剩余数据后再次读返回0，管道为空，直接返回0
+    - 管道读端关闭，写端尝试向管道写数据 ，系统会向写端进程发送SIGPIPE，杀死写端进程
+        - cs服务器基本模型，可以进行连接，和基本的数据收发，客户端异常退出，服务器也有异常退出，为什么？就是因为这个
+        - 解决：如果系统各服务器（写端）发送信号，可以利用MSG_NOSIGNAL忽略信号
+            - send(int socked,buffer,len ,MSG_NOSIGNAL);
+- 匿名管道缺点
+    - 亲缘限制，只能亲缘进程可以使用其完成通信
+    - 默认情况下管道使用无格式字节流传输，需要用户自行封装
+- 管道这种进程间通信方式，效率较好
+- 在所有unix或linux系统，管道都是可以使用的，但是其他系统呢
+
+#### 有名管道（FIFO）
+
+- 底层实现与匿名管道基本一致，但是使用方法不同
+- mkfifo 管道名//创建管道文件
+    - 创建管道后，系统会在内核层创建一个管道缓冲区
+- 管道文件没有存储能力，无法编辑
+    - 我们对管道的操作实际上都是在对管道缓冲区操作
+    - 对这个文件进行文件操作，open打开并设置权限，read读取缓冲区中的内容，write通过重定向写入缓冲区
+- 命名管道的缓冲区绑定管道文件，管道文件被删，立即清理释放管道缓冲区
+- 使用的时候也是单工，匿名管道的情况也适用于有名管道
+- 访问命名管道必须满足两种权限，读写权限，才可以成功打开和使用管道，如果只有其中一种访问权限，会阻塞等待另一种
+    - 单进程只要满足两种访问权限（O_RDWR），可以直接打开和使用管道
+    - 没有满足权限，open函数被阻塞。直到满足两个读写权限
+- 有名管道使用时的特俗情况：
+    - 权限要求，有名管道要求，满足两种权限才可以打开使用
+    - 如果在一个进程中有多个读队列，阻塞只会对第一个读序列生效，其他都会设置非阻塞
+        - 多线程为进程读取数据，一个线程阻塞等待即可，其他线程设置非阻塞立即返回，执行其他任务，避免阻塞开销
+    - 使用原子管道（传输速度较慢，但是数据完整性较好）和非原子使用管道（传输速率高，无法保证数据完整性）：却决于写的大小
+        - 原子写管道，一次写的大小<=管道大小（原子访问）
+            - 系统会检测管道剩余量，如果写端的写大小大于管道余量，系统会挂起写端进程，等管道余量满足写需求大小，在唤醒写端继续写
+        - 非原子写管道，每次写的大小>管道大小
+            - 非原子访问情况下，系统不会控制写端，只要管道缓冲区有余量，写端可以立即写入数据，传输效率高，但是读端读取数据后要校验完整性，避免数据包异常
+    - 不要频繁跟换传输模型
+
+#### MMAP文件共享映射
+
+- 
+- 头文件支持
+    - \#include <sys/mman.h>
+- void* ptr = mmap(NULL,映射大小,PROT_READ|PROT_WRITE,映射方式,文件描述符,映射偏移量);
+    - 1，内存映射地址，如果传入NULL，系统自行分配映射内存
+    - 2，一般时文件大小
+    - 3，映射内存权限:PROT_READ|PROT_WRITE|PROT_EXEC|PROT_NONE
+    - 4，共享映射内存(MAP_SHARED)       私有映射内存(MAP_PRIVATE)
+        - MAP_SHARED:共享映射（Sync同步）
+            - 共享映射：同步映射，将映射文件的数据映射一份给进程，两份数据建立syn同步机制，对一份数据的修改会立即更新给另一份
+        - MAP_PRIVATE:私有映射（拷贝映射）
+            - 私有映射：拷贝映射，将映射文件的数据拷贝一份到映射内存，两份数据独立无关联
+    - 5，映射文件的描述符，映射时使用访问磁盘数据
+    - 6，映射偏移量，mmap支持便宜映射，每次映射一部分
+- 映射成功返回ptr，映射内存地址，失败返回MAP_FAILED关键字
+    - 用户返回的指针类型取决于文件的数据内容，以及用户想以何种方式访问数据
+- 使用mmap完成通信，也是你确定通信方向，一个负责编辑修改映射内存，一个负责显示打印映射内存数据，不要让两端同时修改访问映射内存，会出现数据异常
+- 通过映射方式将文件数据加载到进程内存，效率更高，开销更小
+    - 适合处理大数据文件
+    - 它比read方式有更小的开销（拷贝开销）
+- munmap(void* ptr , 映射大小)；
+    - 释放映射内存
+- 如果一个权限不足的用户，通过映射方式可以修改文件，那么权限变得不安全
+    - 映射权限取决与open打开文件的权限，要小于等于打开权限，否则映射失败
+    - 映射是否成功与用户的权限无关，而是看open的权限
+- mmap通信
+    - 写端
+        - 打开映射文件
+        - 拓展映射文件（截断扩展）
+            - ftruncate(int fd,int size);
+        - 共享映射
+        - 向映射内存写入数据
+    - 读端
+        - 打开映射文件
+        - 共享映射
+        - 打印内存数据
+- 关于mmap的同步机制
+    - 
+- 从文件中读取数据read
+    - 
+- 从文件中读取文件mmap
+    - 
+- ZERO-COPY零拷贝
+    - 零拷贝技术在网络通信时可以减少拷贝开销，并非真的没有拷贝
+    - 
+        - mmap首先可以在内核缓冲区到用户层映射减少一次拷贝开销，而用户层到SOCKET缓冲区的映射大部分系统支持
+        - SENDFILE，可以不经过用户层，直接内核层缓冲区到SOCKET缓冲区，并且不是拷贝，而是直接映射，减少两次拷贝开销（虽然不经过用户层，但是还是得用户层触发（call SENDFILE）这件事）
+            - 只适合文件
+    - mmap和sendfile是两种经典的零拷贝方式
+- 关于映射内存大小问题
+    - 在进行映射时 ，一般要看映射文件大小，如果映射内存与映射文件大小不符，在访问，杀死进程内存时产生总线错误，系统向进程发送SIGBUS，杀死进程
+    - 如果文件为0，那么没有任何访问权限，向次内存读写时会出现总线错误，既访问越界问题
+
+### 进程间关系
+
+- 亲缘关系
+    - Linux操作系统下，进程间的关系是强亲缘（父子），弱亲缘（爷孙）
+    - 爷爷进程与孙子进程最低限度亲缘（继承关系）
+    - 强亲缘关系（父子进程），子进程被父进程创建，子进程的任务被父进程指定，继承父进程数据，子进程结束后，父进程负责回收避免僵尸问题，整个子进程的生命周期父进程要全程参与
+    - 在Linux系统中，fork+execl创建进程和重载是被广泛使用的，操作系统创建进程时也一样
+        - Bash Shell终端，键入命令，执行./app
+        - 终端fork创建终端子进程，然后execl重载app程序，重载成功后重命名
+- Process Group组关系
+    - 一个进程组一般由一个组长进程和若干个组员进程构成
+    - 终端进程被创建，默认为进程组的组长进程（系统会分配一个进程组）
+    - 组长进程的唯一标识：组id == 进程id（pid == gid）
+    - 进程组的销毁
+        - 组中的最后一个进程 ，结束或转移，进程组中没有进程时系统会释放进程组
+    - getpid()
+        - 返回进程pid
+    - getppid()
+        - 返回进程父进程pid
+    - getpgrp()
+        - 返回进程进程组ip
+    - 就近原则，子进程被创建后默认归纳到父进程同组成为组员
+    - 进程组的成员是可以转移的，变为其他组成员，进程组概念与亲缘概念没有必然联系
+    - 组长是不允许转移的（大多数，一前的允许）
+    - 组长进程无法创建进程组，组员进程可以创建新租，脱离原有进程组，成为组长
+    - 子进程成为组长后，原有亲缘关系不变，子进程结束后仍然由父进程回收（子进程脱离原有进程组，父进程可以通过waitpid跨组进行回收）
+    - setpgid(pid_t pid,pid_t gid);
+        - 可以让组员创建新组，也可以将一个组员转移到其他组
+        - pid为要操作哪个组，gid为组id
+        - pid==gid时创建新组
+        - 当转移时，目标组必须存在，并且需要对目标组有访问权限才可以完成转移
+- Process Session会话关系
+    - 会话是一种终端进程管理的组织结构
+    - 终端最为发起者，终端子进程和终端子进程创建的进程作为参与者属于该会话，而终端子进程创建的子进程在终端子进程的组
+    - 会话发起者
+        - pid == gid == sid
+    - 会话发起者结束时，会以组为单位杀死所有参与者（只杀终端子进程那组）
+        - 终端子进程必然被杀死
+        - 可以通过创建组而不被杀死
+            -  但是没有脱离会话
+        -  脱离控制终端
+            - 让子进程脱离会话，创建新会话，避免被终端杀死
+    - getsid(pid_t pid);
+        - 获取pid的会话id（sid）
+    - setsid();
+        - 先创建一个进程组，在创建一个新会话
+            - 终端子进程不会成功，因为他不能创建组
+- Orphan 孤儿进程
+    - 父进程先于子进程退出，子进程被托管给托管进程，子进程属于活态进程，失去管理
+    - 子进程成为孤儿进程后，被托管，父进程改变为托管进程的pid
+    - 16.04托管进程为upstart(UI进程)，14.04版本为1好进程init
+    - 孤儿进程这种活态进程的危害是弹性的，取决于孤儿进程的作业，如果孤儿进程被设置最大量频繁的申请占用系统资源，那么这种孤儿危害极大
+    - 孤儿进程是异常多进程模型的残留，会影响新进程的创建于使用
+    - 解决方案
+        -  另写一个检测程序，父进程与检测程序可以通信
+        - 检测程序
+            - 循环检测父进程（pid）是否存活
+                - kill(pid , 0);可以检测目标是否存活
+            - 检测到退出消息，检测进程退出
+            - 未收到消息，却检测到父进程不在，按照组id杀死一组进程，杀死全部孤儿
+                - kill(-pid,9);
+                    - 按组杀死进程，负数为按组，正数为指定进程
+                    - 不在一组的话，可以让父亲创建子进程时将子进程的pid发给检测进程，检测进程按照pid杀死孤儿进程
+        - 该开始父进程通过进程间通信将自己的pid告诉检测进程，多进程模型执行完后，需向检测进程发送退出消息
+- Deamon Process 守护进程/精灵进程
+    - 守护进程是经典的后台服务进程，持续执行在后台完成特定服务，执行特定功能，不干预前台任务
+    - 普通的软件进程随用户的使用持续，生命周期较短
+    - 守护进程生命周期较长，开机启动关机结束，持续服务于后台
+    - 守护进程不能持续占用系统资源（cpu，内存等等），长时间处于低开销模式
+    - 守护进程的工作模式
+        - 间隔执行，定时启动，条件触发，低消模式（大多数时间处于睡眠态）
+    - 后台服务进程不允许访问前台，标准输入标准输出不使用，标准出错（dup2实现重定向）
+    - 守护进程起始就是孤儿进程，人为的孤儿进程
+    - 守护进程的实现流程
+        - Fork创建子进程，父进程退出
+        - 子进程创建新会话，脱离控制终端
+        - 关闭无用的描述符，将标准出错流重定向
+        - 修改进程的工作路径，改为根目录
+        - 修改目标主机进程umask文件权限掩码，改为0002或0000
+        - 守护进程的核心工作
+        - 守护进程退出处理，释放执行过程中申请的资源数据，守护进程结束时主动释放
+
+### 信号signal
+
+- kill -l#查看系统下支持的信号
+- 经典信号/实时信号
+    - 1-31是unix经典信号，软件开发工程师使用，例如进程通信，信号捕捉
+    - 34-64自定义信号，一般驱动开发者使用，偏底层
+    - 32 33系统隐藏信号（NPTL）系统预留给线程使用
+- 核心已转储
+    - 当进程异常退出 系统可以将异常信息存储在core文件中 后续使用gdb快速定位异常
+    - 默认情况下系统不允许生成core文件，可以使用ulimit 命令允许生成
+    - ulimit -a
+        - 查看，在第一行为0不允许生成core
+    - ulimit -c 4096
+        - 允许生成core文件
+    - gcc app.c -g -o app
+        - 有错误可以看到生成了core文件
+    - gdb app core可以显示错误的位置
+        - 特别复杂的异常并不靠谱
+- 触发信号的几种方式
+    - 终端组合按键触发信号
+        - ctl+c（SIGINT(2)）
+            - 终端组合按键触发的信号会发给为一的前台进程
+            - 用户键入ctl+c
+            - 数据进入标准输入缓冲区，组合按键进入线路规程
+            - 识别组合按键调用相应的功能函数
+            - 操作系统发送信号SIGINT(2)
+            - 解析事件，向目标进程发送目标信号，目标进程被杀死
+        - ctl + \(SIGQUIT(3))
+        - ctl + z(SIGTSTP(20))
+            - 挂起进程
+        - 这三个信号的目标都是唯一的终端前台进程
+    - 命令发送信号
+        - kill -signo pid
+            - 此命令可以向任意进程发送任意信号
+    - 函数发送信号
+        - kill(pid_t pid,int signo);#向任意进程发送任意信号
+            - \#include<signal.h>
+            - kill(10231,9);#不用写-
+        - raise(int signo);#向调用的进程发送任意信号
+        - void abort(void);##向调用的发送SIGABRT(6)信号
+    - 硬件异常产生信号
+        - SIGSEGV(11)(段错误)
+            - 对只读内存进行写操作，属于违规操作硬件，系统向违规进程发送SIGSEGV(11)信号，杀死违规进程
+        - SIGBUS(7)(总线错误)
+            - 越界访问，无效访问内存，系统向违规进程发送SIGBUS(7)信号，杀死违规进程
+        - SIGFPE(8)
+            - cpu违规运算，运算异常，系统向违规进程发送SIGFPE(8)信号，杀死进程
+    - 软条件触发信号
+        - 软条件触发信号，在使用某个组件时，例如定时器，触发软条件，系统向进程发送信号
+        - 管道读端结束，写端向管道写数据（触发软条件），系统向写端进程发送SIGPIPE(13)信号杀死写端进程
+- 信号的三大行为，与五种默认的处理动作
+    - SIG_DFL默认行为
+        - 五种默认动作
+            - TERM
+                - 直接杀死目标进程，SIGKILL，SIGINT
+            - CORE
+                - 直接杀死进程，但是转储核心处理文件（dump core），SIGQUIT，SIGSEGV，SIGFPE，SIGBUS
+            - IGN
+                - 通知回收信号SIGCHLD，忽略信号，发到进程不会影响进程，进程退出给父进程发送的信号
+            - STOP
+                - 挂起信号，SIGSTP，SIGTSTP
+            - CONT
+                - 唤醒进程，SIGCONT
+        - 信号处置进程后，可以通过结果分析信号的默认行为
+    - SIG_IGN忽略行为
+        - 忽略行为没有处理动作，直接丢弃，不会影响进程
+        - 忽略行为的优先级比动作要高
+    - SIG_ACTION捕捉行为
+        - 捕捉行为可以实现信号绑定自定义任务，信号触发，执行捕捉函数，执行自定义任务
+        - 在开发中普遍使用
+- 让信号失效的三种方式：屏蔽，忽略，捕捉
+- 系统保留高权级信号，这类信号无法被屏蔽，捕捉和忽略，服务于内核，只要发出必然到达
+    - SIGKILL(9)
+        - 无法被屏蔽，捕捉，忽略，只要发出必然杀死
+    - SIGSTOP(19)
+        - 无法被屏蔽，捕捉，忽略，只要发出必然挂起
+- 信号的传递过程
+    - 
+    - 信号由系统(内核)发从抵达目标进程内核层的PCB
+    - 在PCB中也是有着一个传递过程的有两个位图：未决信号集，屏蔽字信号集
+        - 0允许信号通过 1不允许信号通过
+        - 未决信号集系统自动设置
+        - 屏蔽字信号集，用户可自行设置，可以阻塞屏蔽信号，使其无法抵达
+            - 为1实现阻塞信号
+    - 当信号无法通过未决信号集时，此信号直接丢弃
+    - 如果信号通过未决信号集，系统将该位的位码设置你为1，标记为未决信号，表示此信号正在传递，还未处理
+    - 此时为1，信号会被卡住，后面的信号又被丢弃，因此信号不支持排队
+        - UNIX经典信号不支持信号排队处理
+        - 自定义信号实现了排队序列，多个相同信号触发，也可以排队依次处理
+    - 如果信号通过屏蔽字，进入handler处理流程，系统会将未决信号集对应位码翻转回0，表示从未决信号切换为抵达信号
+    - 信号屏蔽是延迟处理，此信号未消失，某一个屏蔽解除，此信号马上抵达，处置进程
+    - 忽略信号，信号没有处理流程，只传递不处理
+    - 可以实现自定义动作，也可以捕捉函数为空
+- 信号屏蔽实现
+    - \#include<signal.h>
+    - sigset_t set;//信号集类型
+    - sigemptyset(sigset_t* set);//将set信号集中所有位初始化为0
+    - sigfillset(sigset_t* set);//将set信号集中所有位初始化为1
+    - sigaddset(sigset_t* set,int signo);//将set集合中某个信号的对应位设置为1
+    - sigdelset(sigset_t* set,int signo);//将set集合中某个信号的对应位设置为0
+    - bitcode = sigismember(sigset_t* set,int signo);//查看某个信号集中，对应信号的位码并直接返回0 or 1
+    - sigprocmask(SIG_SETMASK,segset_t* newset,&oldset); //可以替换进程信号集，并将原有的oldset传出保存，便于复位
+        - SIG_SETMASK(替换覆盖)
+        - SIG_BLOCK(位或)
+        - SIG_UNBLOCK(取反求与)
+    - sigpending(&pset);//调用此函数，系统将进程的未决信号集传出到pset中
+- 查看信号的屏蔽情况
+    - 信号已经被发出，抵达进程，进程中被屏蔽，要观察这种已经被屏蔽的信号只能查看未决信号集
+    - 获取进程的未决信号集，而后输出未决的每一位，0 or 1，查看信号屏蔽
+    - 使用遍历循环结合sigismember，查看每一位的输出情况
+- 临时屏蔽字
+    - 系统为了避免相同的信号同时进入处理流程所以会临时将屏蔽字设为1，只让一个该信号到达，其他信号不影响
+    - 无论是杀死进程还是捕捉行为，同时进入多杀一次，还是捕捉函数执行两遍（可能产生冲突），都是没必要的
+    - 经典信号因为系统设置临时屏蔽的关系，两个相同信号触发，可以在未决信号集与屏蔽信号集中间存储一个信号
+- 信号行为修改
+    - struct sigaction act;//信号行为结构体
+    - act.sa_handler = SIG_DFL|SIG_ICN|传递函数指针 ->自定义捕捉函数
+        - sa_handler = void (*sa_handler)(int) sa_handler是一个函数指针类型， 但是捕捉函数定义必须与其一致
+        - 系统调用捕捉函数时，系统向n传捕捉函数的信号编号
+    - act.sa_flags = 0;//此成员与行为接口绑定，如果使用sa_handler那么sa_flags为0，如果使用sa_action，sa_flags为SA_SIGINFO
+    - act.sa_mask//sigset_t信号集类型，为临时屏蔽字，使用sigemptyset/sigfillset 初始化
+        - 在进程处理一个信号时，可以使用sa_mask临时屏蔽其他信号，等信号处理完毕再解除屏蔽，避免不同信号调用相同捕捉的冲突
+        - 不设置的话系统只会将该位置设置为1，其他位置不管
+        - 进程会处理后来的信号，中间出现跟后来的处理跟后来的，直到这个处理完，并且因为这个临时
+        - sigemptyset初始化为0，则其他信号来了可以进入处理流程，新的信号来了，处理新的信号，类似函数栈，先进后出，相同信号也会重新执行函数
+        - sigemptyset初始化为1，则其他信号来了不可以进入处理流程，处于未决信号集和屏蔽字信号集中间，处理新的信号，因为临时屏蔽字都为1，此时相同信号来了，也会处于中间，且只有一个，再来丢弃
+    - sigaction(int signo,struct sigaction* newact,struct sigaction* oldact);//替换进程的信号行为结构体，用newact替换，传出oldact(进程原有结构体)
+- 通过信号回收子进程的PCB（被动方案）
+    - 如果子进程结束，系统会给父进程发送通知，父进程完成回收
+    - 子进程退出，系统发送SIGCHLD(IGN)信号给父进程，该信号为忽略信号，可以利用该信号，当收到该信号时，回收子进程
+    - 捕捉设定应在创建子进程之前完成
+    - 回收的次数，如果按照信号的数量回收，信号不会排队，会自动丢弃，会产生大量漏收
+    - 利用一个信号回收多次，直到将当前可以回收的全部回收即可
+- 信号处理的流程
+    - 信号处理的优先级较低
+    - 信号一定会被处理
+    - 信号是延时处理的
+    - 
+    - 但我们开始执行时，即便信号在快，也没执行main函数的速度快
+    - 用户层到内核层触发层级转换的条件
+        - 软件中断
+            - 没有时间片了
+        - 系统调用
+        - 软件异常pre_error
+    - 流程
+        - 1.进程在用户层执行逻辑单元
+        - 2.系统发送信号到内核层（等待处理）
+        - 3.进程触发层级转换，从用户空间切换到内核空间
+        - 4.切换到内核层后先完成系统调用
+        - 5.完成系统调用后，返回用户空间之前，检查一下是否有未处理的信号，有则处理
+        - 6.有信号，处理信号，默认行为和忽略行为再内核层就可以完成，单数捕捉行为，代码再用户层，此时携带高级权限(内核层权限)，切换到用户层
+        - 7.执行捕捉函数完毕后，通过SIG_RETURN指令返回内核层
+        - 8.系统调用和信号处理完毕，返回用户层
+        - 9.从main被终端的位置继续执行
+    - 一般main先执行 过程中产生信号，系统执行捕捉函数，捕捉函数先执行完，稍后回到函数执行
+    - 内核切换到用户层执行捕捉函数，使用进程本身资源（时间片或内存）
+- 内核层与用户层
+    - cpu访问权限不同
+    - 用户层访问一些资源处处受限
+    - 内核层最高访问权限
+- 可重入与不可重入
+    - 不可重入：使用全局资源或静态资源的函数为不可重入函数，这种函数信号捕捉函数与主函数同时使用会引发异常
+    - 可重入：访问的数据也好，函数也罢，都不可访问共享资源，不会引发冲突，这种函数为可重入函数，信号使用可重入函数是安全的
+    - 信号捕捉开发不允许使用不可重入内容
+- 进程间通过信号通信
+    - sigqueue(pid_t pid,int signo, union sigval val);//向任意进程发送任意信号并且携带自定义数据
+    - val.sival_int = 整形数据 val.sival_ptr = void* 地址数据
+        - 使用时选择一种数据进程通信
+    - void sa_handler(int n),不支持接受通信数据
+    - void sa_sigaction(int n,siginfo_t* info,void* arg);
+        - info->si_int接受整形数据
+        - info->si_ptr接受指针数据
+    - 此时act.flags = SA_SIGINFO;
+    - 进程间通信使用的信号
+        - SIGUSR1(10)
+        - SIGUSR2(12)
+    - 父进程捕捉SIGUSR2，信号触发，输出数据，完成数据回传
+    - 子进程捕捉SIGUSR1，信号触发，输出数据，完成数据回传
+    - 父进程发送的信号可能在子进程完成信号捕捉设定之前到达，这回杀死子进程
+    - 可以在父进程中屏蔽SIGUSR1，让子进程直接继承，子进程完成信号捕捉设定之后解除SIGUSR1屏蔽
+- 通过alarm与pause实现睡眠
+    - unsigned int alarm(unsigned int);定时进程，定时结束，系统向定时进程发送SIGALRM信号，定时为cpu定时，与进程无关
+    - SIGALRM信号默认为TERM，会杀死进程，一定要让其失效
+    - void pause(void);//执行立即挂起当前进程
+        - 可以察觉到信号唤醒，挂起过程中，察觉任意信号立即唤醒，此信号必须要有处理动作
+        - 使用信号捕捉让信号失效，并且有处理流程，可以被pause察觉， 捕捉函数空调用即可，没有附加功能
+        - 这意味着就，在定时到时前，如果有信号先于ALRM信号抵达，pause回味误唤醒
+    - 若在挂起之前信号到达处理，再次挂起则永久挂起
+        - 比如alarm(2)，后sleep(3),在sleep期间信号到达，处理后挂起
+        - 添加屏蔽字，在挂起前解除，但这也有一个问题，就是接触后还没执行挂起，信号已经被处理了
+            - 原子操作
+        - 解决：让解除临时屏蔽字，与挂起操作为一个原子操作，解除的同时挂起
+            - siguspend(&act.sa_mask);//临时解除屏蔽并挂起
+        - 这给时序问题提供了一个解决方案，考虑原子操作，将关键步骤变为不可分离的原子操作，避免一些异常
+- 实现进程的外部控制
+    - 外部通过信号可以控制服务器的挂起唤醒，执行附加功能，控制日志文件重定向
+- 关于阻塞和信号处理冲突
+    - 
+        - 
+    - 阻塞函数处于等待状态，等待系统通知或事件消息
+    - 此时信号来了捕捉函数执行，可能执行很久
+    - 如果此时系统通知，事件，但是时间片被捕捉函数占用
+    - 为解决，系统强制中断阻塞函数
+        - 中断检测(errno == EINTR),而后重新执行
+
+### 线程
+
+- 线程基本概述
+    - 经典的并发模型 多进程模型，占用大量的内存开销，庞大的进程间调度开销，提供一种开销更小，更轻量的并发解决方案，多线程技术
+    - 线程在进程中，与进程共享资源和数据，进程是容器，线程是执行单元，进程退出可能导致所有线程退出
+    - 不支持线程技术的操作系统可以忽略线程概念，进程是调度单位
+    - 多线程操作系统下，进程是内存管理单位，线程才是唯一的调度单位
+    - 线程就是寄存器和栈
+    - 操作系统会给进程分配需要的内存单元，进程自带一个线程为主控线程
+        - 主控可替代，当主控退出，进程不退出，主控就被替代了
+    - 主控线程创建的线程为普通线程
+        - 普通也可以创建普通
+    - 多进程有多个系统分配的空间（PCB），多线程是在这个进程的基础上，在用户层分配资源给线程，多个线程共用PCB
+        - 
+            - 
+- 线程的CPU分配
+    - CPU有Control控制器，给每个CPU识别（认识）的创建内核对象，通过内核对象分配时间片
+    - 线程按照权限(分配时间片)分为内核级线程与用户级线程
+        - 内核级线程
+            - 操作系统中每创建一个线程，系统都会为其创建一个内核对象，此线程操作系统可以识别支持，会为线程执行资源(时间片)
+                - 
+                    - 
+        - 用户级线程(在不支持线程的操作系统中，自己通过库安装的)
+            - 时间片只按照进程分配，系统不会分配时间片给线程，但是进程的时间片可以不用，让给线程，让他使用资源
+            - 用户级线程，可以利用第三方库的形式在不支持线程技术的系统下安装和使用线程，用户级线程的调度开销更小，因为大部分的操作都在用户层完成，无需内核干预
+- Linux系统下
+    - 在Linux操作系统下，线程就是轻量级线程，每个进程分配一个LWP
+    - 在linux操作系统下，所有的调度单位都是进程，淡化线程概念
+- 进程蜕化
+    - 进程一个调度单位，进程内存资源独占，不予其他人共享，进程是独立的调度单位（无需考虑线程问题）
+    - 进程中出现了多个执行单元，讨论考虑线程问题
+    - 讨论和分析的蜕化，讨论线程，进程的讨论变为主线程和普遍先册灰姑娘的分析和讨论
+- 线程的共享和非共享资源
+    - 共享资源
+        - PCB
+        - 库资源
+        - 堆空间
+        - 全局资源共享
+        - 代码段
+        - 文件描述符表
+        - 信号的处理行为共享(某个线程改变行号行为)，对所有线程有效
+    - 非共享资源
+        - 线程栈空间非共享，每个线程创建后，分配8M线程栈
+        - 信号屏蔽字非共享，普通线程拥有独立的屏蔽字，拷贝于主线程
+        - TCB非共享，每个线程拥有独立的线程控制块，独立的tid
+        - 线程的优先级指针非共享
+            - 指线程获得时间片的优先级
+        - errno全局变量非共享
+            - 为避免多线程使用errno异常，在想成使用errno为局部变量，但是线程有自己的错误处理方式，无需使用errno
+- 线程开发相关的API接口
+    - NPTL线程库是典型的内核级线程库，创建线程可以被系统识别分配cpu资源（轻量级进程）
+        - nativ Posix thread library
+    - ps aux进程查看
+    - ps ajx进程关系查看
+    - ps -eLf所有线程查看
+    - ps -Lf pid进程中线程查看
+    - 每个线程都会被系统分配lwp调度编号，便于系统管理调度线程，但是线程拥有独立的tid 线程id
+    - 头文件
+        - \#include <pthread.h>
+    - 因为线程在linux中是以库的形式实现的，编译时要进程链接库-lpthread
+    - 错误处理：线程函数会返回错误号（err > 0）,使用char* errstr = strerror(err);
+        - 头文件：string.h
+    - pthread_t tid;线程tid类型
+    - int err = pthread_create(pthread_t* tid,NULL,void* (*thread_job)(void*),void* arg);//线程创建并指定任务
+    - pthread_t tid = pthread_self();//返回调用者线程的tid
+        - 打印线程id习惯用16进制：%x
+        - 主线程通过pthread_create创建普通线程，成功传出tid于普通线程自身利用的pthread_self()得到的tid值相等但是进程状态不相等，因为pthread_self()获取tid时可以保证当前的有效性，主线程的tid无法保证
+    - pthread_join(pthread_t tid,void** reval);//线程回收函数，可以回收线程资源的同时获取线程的返回值，经典的阻塞回收函数，一直等待线程结束后，进行回收
+        - 不会受会引发僵尸线程（TCB残留）
+    - pthread_cancel(pthread_t tid);//指定线程tid，取消结束线程
+        - cancel处理条件必须有系统调用，不然无法杀死线程
+        - 如果线程被取消，那么收到的返回值为-1，线程开发时不允许使用-1作为返回值，保留给cancel
+    - pthread_testcancel(void);//产生一次系统调用
+    - pthread_detach(pthread_t tid);//将线程设置为分离态线程
+        - 回收态线程，这种状态是线程的默认状态，这种线程结束后必须手动回收pthread_join
+        - 分离态线程，这种线程结束后系统自动回收线程资源，无需用户干预
+        - 两种状态互斥，修改线程退出状态，从回收态改为分离态，此操作不可逆，不能将分离线程变为回收线程
+        - 分离态线程进行回收操作，pthread_join会失败返回
+        - 对一个已经处于回收阶段（join已经开始阻塞等待了）的线程设置分离，分离设置失败
+        - 一个自行回收，一个系统回收，一个可以得到线程退出码，一个无法获取
+        - 可以通过线程属性，批量创建分离态线程，这些线程诞生就是分离态
+- 线程退出方式
+    - return 0;
+        - 主线程执行，进程退出，线程关闭
+        - 普通线程执行，线程返回结果，线程结束
+    - pthread_exit()
+        - 无论是主线程还是普通线程执行，均为线程退出，不影响进程
+    - pthread_cancel()
+        - 取消目标线程，与进程无关（可以取消主线程）
+    - exit()
+        - 无论主线程还是普通线程执行，进程退出，所有线程关闭，释放资源
+- 线程属性
+    - pthread_create(&tid,pthread_attr_t* arr,thread_job,void*arg );
+    - 
+    - pthread_attr_t arr;//线程属性类
+    - 线程警戒缓冲区，一旦向里面写入东西视为越界，产生段错误
+        - 
+    - 线程栈大小默认为8M，修改线程栈大小可以提高线程数量 64位不可用
+    - 线程属性为空，使用默认属性结构体
+    - 使用自定义结构体可以实现哪些开发目的
+        - 直接创建分离态线程，而不是后期修改
+        - 通过修改线程栈的信息提高线程创建数量
+    - 使用线程的默认属性已经可以满足绝大数多数开发需求了，没有特俗需求，不建议修改
+    - 修改流程
+        - 定义属性结构体
+            - pthread_attr_t arr;
+        - 初始化结构体
+            - pthread_attr_init(&attr);
+            - 初始化后的结构体为默认属性
+        - 设置属性结构体
+            - pthread_attr_getdetachstate(&attr,int* detachstate);//获取状态传出
+            - pthread_attr_setdetachstate(&attr,int detachstate);//设置退出状态
+                - PTHREAD_CREATE_DETACHED   分离关键字
+                - PTHREAD_CREATE_JOINABLE     回收关键字
+            - pthread_attr_getstack(&attr,void** stackaddr,size_t* stacksize);//获取属性中的栈信息
+            - pthread_attr_setstack(&attr,void* stackaddr,size_t stacksize);//设置栈信息
+                - 如果要修改进程栈，需要自行申请栈空间malloc
+        - 创建线程使用自定结构体
+            - pthread_create(&tid,&attr,thread_job,arg);
+        - 属性使用完毕释放
+            - pthread_attr_destroy(&attr);
+
+### 线程安全
+
+- 互斥访问
+    - 
+    - 多线程访问全局资源或者静态资源，访问文件数据，使用共享数据引发异常
+- 互斥锁
+    - 
+    - 
+    - pthread_mutex_t lock;//互斥锁类型
+    - pthread_mutex_init(&lock,NULL);//互斥锁初始化
+    - pthread_mutex_destroy(&lock);//释放互斥锁
+    - pthread_mutex_lock(&lock);//申请锁，阻塞申请
+    - pthread_mutex_trylock(&lock);//非阻塞申请锁，锁被占用不会阻塞，立即返回
+    - pthread_mutex_unlock(&lock);//解锁
+    - 加锁的位置问题，可能改变线程执行流程
+        - 参考：只有全局资源读写时需要上锁
+    - 惊群问题，多线程争抢资源，因资源有限，未抢到的线程付出了无意义的系统开销
+    - 当其他线程占据资源时，系统自动分发标记给挂起的锁，告诉他下次资源释放时唤醒
+    - 就近原则，某个线程释放了锁立即申请，它还会占用锁
+- 旋转锁/自旋锁
+    - 不会挂起等待锁，一直重复请求，知道获取成功为止，请求旋转锁的线程不会挂起，一直处于运行态R
+    - 当解锁时，会立即获得锁
+    - 锁的利用率很高
+- 读写锁
+    - 互斥锁不允许多个线程同时访问资源，资源利用率较低，读写锁可以解决这个问题，它支持一个线程写资源，多个线程可以同时读资源，提高资源利用率
+    - 读写锁读写互斥
+    - pthread_rwlock_t lock;//读写锁
+    - pthread_rwlock_init(&lock,NULL);//读写锁初始化
+    - pthread_rwlock_destroy(&lock);//释放读写锁
+    - pthread_rwlock_rdlock(&lock);//申请读锁
+    - pthread_rwlock_wrlock(&lock);//申请写锁
+    - pthread_rwlock_unlock(&lock);//解锁
+- 文件锁（读写锁）
+    - 
+    - 1把写锁，n把读锁，读共享，写独占，读写互斥
+    - 文件锁结构体
+        - l_type//表示上锁方式，包含上读锁，写锁和解锁，F_RDLCK,F_WRLCK,F_UNLCK
+        - l_whence//上锁的绝对位置，SEEK_SET,SEEK_CUR,SEET_END
+        - l_start//相对位置，是依据绝对位置描述的
+        - l_len//可以自行填写上锁长度，如果传0则锁整个文件
+        - l_pid //pid中存储当前占用文件锁的进程id
+    - 文件锁是通过修改文件锁属性实现上锁和解锁效果，用户需要自定义锁结构体并赋值，而后对文件默认锁结构体进程替换，实现文件锁操作
+    - fcntl(fd,F_GETLK,struct flock* lock);//将文件默认的锁结构体传出到lock变量中
+    - fcntl(fd,F_SETLK,struct flock* newlock);//将自定义的newlock替换文件原有的结构体，实现上锁效果，F_SETLK是非阻塞上锁
+    - F_SETLKW//阻塞上锁关键字，如果文件锁被占用，则会挂起等待
+- 死锁问题
+    - 
+    - 锁资源有限，但多线程相互请求锁资源，导致线程永久阻塞，这种现象称为死锁
+    - 死锁发生的四个必要条件
+        - 保持与请求条件（贪婪）
+            - 某个线程在占用一把锁后还请求新锁，容易引发死锁问题
+        - 不可剥夺条件
+            - 除了占用资源的线程外，其他人无法解锁资源
+        - 互斥条件（阻塞等待）
+            - 某个线程占用锁资源后，其他线程申请则挂起等待
+        - 环路等待条件
+            - 每个线程都在等待相邻线程手中的资源，这种称为等待环路
+    - 死锁处理
+        - 产生死锁后，杀死死锁线程解除死锁，而后在创建（死锁频繁，创建销毁线程开销较大）
+    - 死锁检测
+        - 有向图检测
+            - 
+            - 可以通过图遍历算法检测出，图中是否出现环路，如果是则以发生死锁，可以通过杀死线程的方式杀死某个节点，解除死锁
+    - 死锁预防
+        - 
+        - 哲学家只有两种工作模式，思考和进食
+        - 思考不占用资源，进餐时每个哲学家先获取左手的筷子，在获取右手的筷子
+        - 死锁现象：5名哲学家同时进餐，分别拿起左手的筷子，等待获取右手的筷子，产生死锁问题，永久挂起
+        - 礼貌策略：当某个哲学家拿起左手的资源，发现无法获取右手的资源，它会放下左手资源，让其他人进餐
+        - 活锁问题：如果哲学家同时频繁触发礼貌机制，导致所有哲学家拿起放下餐具，无法进食，饿死
+        - 高权级策略：选中一名哲学家提高权限，此哲学家要进餐时，向相邻哲学家发送通知，让其放下资源
+        - 高权策略，由于优先级转换，可能导致多数时间，只有超级哲学家在进餐
+        - 多线程情景下，资源有限，多线程合理的规避问题，合理使用资源
+        - 服务者模式
+            - 有个服务者，每个哲学家进餐时要询问服务者是否可以进餐，允许则获取资源，不允许放弃本次进餐，进入下一轮行为选择
+        - 银行家算法
+            - 银行家算法将资源都抽象为银行资产，每个用户借款，银行进行风险评估，如果风险超出阈值，禁止放款
+
+#### 线程控制（条件变量）
+
+- 
+- 条件变量技术实现线程的挂起和唤醒
+- 为线程指定条件，按执行条件挂起唤醒控制线程
+- pthread_cond_t cd;//条件变量类型，线程可以挂起在条件变量中，也可以从中唤醒
+- pthread_cond_init(pthread_cond_t* cd,NULL);//初始化条件变量
+- pthread_cond_destroy(pthread_cond_t*cd);//销毁释放条件变量
+- pthread_cond_wait(pthread_cond_t* cd,pthread_mutex_t* lock);//；两次执行
+    - 线程第一次执行wait函数，挂起线程的同时解锁互斥锁
+    - 线程被唤醒执行cond_wait,上锁互斥锁
+- pthread_cond_signal(pthread_cond_t* cd);//唤醒一个被挂起在cd中的线程
+- pthread_cond_broadcast(pthread_cond_t* cd);//唤醒所有挂起在cd中的线程
+- signal函数的误唤醒，如果系统是多核处理器cpu，signal函数可能唤醒多个线程，导致误唤醒
+- 条件变量的数量取决于工作条件的数量
+
+- 生产者消费者
+    - 
+    - 经典的数据传递或任务传递模型
+    - 生产者
+        - 仓库为满则挂起，仓库非满则添加数据
+        - 生产者生产数据后，通知一个消费者，让他获取数据或任务
+    - 消费者
+        - 仓库为空则挂起，仓库非空获取数据使用
+        - 消费者获取任务后，唤醒一个生产者
+
+### socket套接字
+
+- 一般用于网络应用开发，系统提供的一套API函数接口，称为套接字函数，网络应用开发是软件开发工程师必备技能
+- everything its file，将所有的设备访问方式抽象为文件，可以通过文件描述符访问大多数Linux设备
+- 
+- int sockfd = socker(AF_INET,SOCK_STREAM,0);//成功返回sock_fd,失败返回-1，errno被设置
+    - 0，表示默认的协议类型，SOCK_STREAM为TCP SOCK_DGRAM默认的为UDP
+- bind(sock_fd,struct sockaddr*addr,socklen_t addrlen);//成功返回0，失败返回-1
+    - 绑定可以对socket设置自定义的ip和端口号，其次当绑定某端口的进程退出，可以临时禁用端口号，时长为2MSL
+    - struct sockaddr_in addr;//网络信息结构体类型 addr.sin_family = AF_INET; addr.sin_port = 大端(8080); addr.sin_addr.s_addr = 大端(ip);
+    - htons();//小端转大端端口 htonl();//小端转大端ip ntohs();大端转小端端口 ntohl();大端转小端ip
+        - h：小端 n：大端 s：端口 l（小L）：ip
+    - inet_pton(AF_INET,char* ip,void* addr);//字符串转大端序 iner_ntop(AF_INET,void* addr,char* ip,16);//大端序转字符串
+        - n：大端序 p：字符串
+- listen(int sockfd,int backlog);//成功返回0，失败返回-1
+    - 
+- connect(int sockfd ,struct sockaddr* dest,socklen_t addrlen);//请求链接函数，成功返回0，失败返回-1
+- int sockfd = accept(int sockfd,struct sockaddr* addr,socklen_t* addrlen);//成功返回sockfd，失败返回-1
+    - addrlen传入传出参数，传入能接受的大小，传出成功后实际大小
+- ssiize_t recv(int sockfd,void* buf,size_t size ,int flag);MSG_DONTWAIT 非阻塞读，成功返回读取的数据量，失败返回-1
+- ssize_t send(int sockfd,void* buf,size_t size ,int flag);MSG_NOSIGNAL 避免信号杀死
+
+### 服务器操作系统
+
+- unix，linux，Windows Server，在服务器基础系统领域，linux和unix还是独占较大的时长份额的
+- 开源服务器 Apache，Nginx，tomcate    经典的Web服务器，用于网页网站的后台支持
+- 集群概念/分布式结构
+    - 算力服务器主机：GPU/显卡
+    - 存储服务器：堆叠固态和机械硬盘
+    - 数据库服务器 oracel等
+    - 代理服务器：负载均衡
+    - 分布式概念是一种硬件的横向扩张策略，可以提高集群主机的物理性能，分布式策略可以通过socket技术将各种设备连接起来，统一调度，资源管理，资源共享
+- APUE经典的几种服务器软件开发模式
+    - 单进程服务器
+        - 连接部分（accept阻塞）
+        - 业务处理部分（recv阻塞）
+            - recv()读取请求
+            - send发送响应
+        - 阻塞冲突，读取请求时无法连接，等待连接时无法读取请求
+        - 客户端退出，有两条退出提示，且socket相等
+            - 在一个客户端连接期间，另一个客户端发送连接请求，此时服务器处理业务，accept无法连接，该请求在三次握手之前的三次握手请求队列中（队列大小为监听大小），当在正在连接的客户端退出时，该链接立马建立连接，若在断开之前，开客户端退出，则建立的瞬间退出
+        - 单进程非阻塞轮询模型（服务器）
+            - 将accept和recv设置为非阻塞的，数组保存客户端的sock，初值为-1，accept设置服务器的sock通过fcntl，F_GETFL，F_SETFL设置为O_NONBLACK非阻塞，recv关键字MSG_DONTWAIT
+            - accept错误处理当返回为-1时，errno == EAGAIN进行非阻塞读取（循环），读取结果为0，退出，数组中置-1，close(sock)
+            - 只符合简易环境下的需求
+            - 单进程采用非阻塞交替执行的策略让等待链接与读取处理交替执行，但是如果服务端长时间为某个客户端处理业务，导致无法建立新连接处理其他人的数据
+    - 并发服务器-多进程并发模型
+        - 
+        - 流程解读
+            - 父进程负责建立连接，子进程一对一对客户端服务，客户端关闭子进程随之退出
+            - 子进程退出会产生僵尸进程，而子进程必须是父进程回收，但父进程主要是负责建立连接，而无论阻塞还是非阻塞回收都会影响连接
+            - 我们创建一个线程，普通线程与主控线程没有区别，我们让他去回收（捕捉）信号SIGCHLD
+            - 线程的信号行为共享，父进程需要屏蔽信号SIGCHLD，否则父进程阻塞等待连接，信号抵达，阻塞函数与信号产生冲突，系统强制中断阻塞函数errno == EINTR，中断这段时间内丢失链接
+            - 为避免子进程捕捉函数设置之前信号抵达， SIGCHLD默认忽略行为，信号会丢失，需要在常见线程之前让父进程设置屏蔽字，线程可以在创建时会拷贝创建它的屏蔽字
+            - 捕捉设定之后解除屏蔽字
+        - 缺点
+            - 具备并发处理能力的服务器模型，可以并发连接并发处理，为若干客户端提供服务
+            - 频繁创建和销毁进程有庞大的系统开销
+        - 优点
+            - 多进程稳定性强，因为每个处理单元是一个进程，一个进程异常退出不会影响其他进程
+    - 多线程并发模型
+        - 
+        - 稳定性较差，线程崩溃可能影响其他线程，但是开销小轻量级（线程安全问题）
+    - IO复用模型
+        - recv，accept工作
+            - 
+            - sock有三种事件，读，写，异常事件，读事件又可以去执行recv或者accept
+            - sock处理流程：监听事件触发，事件触发，处理事件，处理完毕
+                - 处理事件：读取数据或完成连接
+                - 处理完毕指：serversock建立完成连接，完成三次握手 clientsock将数据全部读取完
+            - accept，recv的阻塞就是一直等待这个事件触发，然后按照流程去处理
+        - IO复用（sock监听技术）
+            - 原理
+                - 
+                - IO复用技术，可以监听某个事件， 进程中所有的sock的可以被监听
+                - 当监听到就绪，辨别就绪（serversockfd，clientsockfd），对应处理就绪
+                - 这样就不需要一个sock一个进程去一直等待事件，而是当事件来了，再去处理
+                - 有Io复用的recv与没有的不同
+                    - 有的话直接去读
+                    - 没有的需要先监听，监听到了在读
+                - 将recv，accept等待阻塞（监听）的功能分离出来，IO复用技术专门去监听
+                - IO复用技术又名多路IO转接技术，可以帮助开发者监听大量的sock
+                - 单进程通过此技术可以实现一对多，但是建立连接与读取数据移然无法同时进行，根本问题没有解决
+            - select模型
+                - 
+                - 有fd_set(1024)集合，集合内每个标志位为0/1，代表着是否监听该位的描述符
+                    - 监听集合对应文件描述表，所以设置监听数量时要考虑设备描述符（stdin,stdout,stderr）
+                    - 0不监听，1监听
+                    - 监听事件选择以集合为单位，批处理
+                - select轮询监听集合，当监听到指定事件后，返回就绪sock的数量，并别将监听集合改为就绪集合传出，就绪集合中为1的位置为就绪sock
+                    - 将监听集合中就绪的sock位保留位1，所有未就绪的清零
+                - FD_ISSET()判断就绪
+                    - serversockfd就绪，accept
+                        - 将新的sock设置到监听集合中，并放到数组中保存
+                    - clientsockfd就绪，recv读取并响应
+                        - 如果是断开连接，取消监听，并且将此sock从数组中删除
+                - 监听集合在就绪后会被修改，所以用户要将传入和传出分离
+                - int ready = select(maxfd + 1 , fd_set* rd , fd_set* wr , fd_set* err , timeval* timeout);
+                    - maxfd为最大的描述符，因此要时刻记录最大的描述符
+                    - timeout = NULL ，阻塞监听
+                    - struct timeval* val; val.secons = 0; val.ms = 0;
+                        - 非阻塞使用select，需要自定义时间结构体并加盖你时间成员初始化为0
+                        - 如果需要select定时阻塞，用户自行设置时间在结构体中
+                - 监听原理（怎么轮询的）
+                    - 
+                    - 用户层的监听集合拷贝到内核层，内核层再把监听的sock一个个挂载在IO等待队列，在等待队列中轮询查看是否就绪
+                    - 当有就绪的，IO设备修改监听集合根据就绪情况变为就绪集合，然后传出
+                    - select每轮使用都需要将新的监听拷贝到内核空间，但是监听集合中大量的项以前已经拷贝过了，重复且没有意义的开销拷贝
+                    - 每次挂载时都需要重新挂载，产生无意义的挂载开销
+                - fd_set set;监听集合类型
+                - FD_ZERO(&set);初始化监听集合，将位码初始化为0
+                - FD_SET(int sockfd , &set);将sockfd在集合中对应的位设置为1
+                - FD_CLR(int sockfd , &set);将sockfd在集合中的对应位设置为0
+                - int code = FD_ISSET(int sock , &set);返回sockfd在集合中位码
+                - 如果就绪的数量 > 1产生异常，因为就绪的sock存储在oset中，用户处理完就绪后（建立连接，读取完数据）。将刚刚处理完毕的sock在oset中设置为0，避免因为ose不变导致异常判断的问题
+                - 优点
+                    - 使用比较简单，了解监听集合以及IO复用机制即可使用，帮助用户完成少量sock的网络事件监听
+                    - 跨平台兼容性较好，在各个系统语言均有select支持
+                    - select支持微秒级定时，可以满足一些特定需求
+                - 缺点
+                    - select无法满足大量监听需求，最大监听数是1024（fd_set）
+                    - 轮询监听（CPU），随着轮询数量的增大，IO处理性能（CPU）呈线性下降
+                    - select监听到就绪后只返回就绪的数量，需要用户自行遍历查找就绪的sock
+                    - 需要用户进行传入传出分离设置
+                    - 随着select的持续使用，会有庞大的拷贝开销与挂载开销
+                    - 监听数量（读，写，异常）比较少，其次设置监听不灵活，无法针对不同的sock设置不同的监听
+            - poll模型
+                - 在select基础上，解除了最大监听数量的限制，不在局限于1024，同时监听的事件更多，但是没有改变轮询监听的机制，没有根本解决问题
+                - poll的原理与select一样
+                - 优点
+                    - 监听事件的种类丰富，对监听与就绪进行了传入传出分离，无需用户分离
+                    - poll支持用户自定义长度结构体数组作为集合，突破了1024限制
+                - 缺点
+                    - 轮询问题，拷贝开销与挂载开销，只能返回就绪数量用户自行遍历查询就绪，poll只支持毫秒级别定时
+                    - 大多数不支持poll，在某些特定的linux版本才能使用
+                - struct pollfd listen_array[4096];//监听数组，还可以帮助用户存储sock
+                - listen_array[0].fd = sock;//sock为要监听的值，-1取消监听
+                - listen_array[0].events = POLLIN|POLLOUT|POLLERR;//设置要监听的事件
+                - listen_array[0].revents;如果监听的sock就绪，系统将就绪事件传到revents中
+                - int readycode = poll(listen_array , 监听数组大小，timeout);//timeout -1 阻塞，0 非阻塞，>0 定时阻塞
+            - epoll模型
+                - 流程解读
+                    - 
+                    - epoll整合了select 和 poll的优势，并且优化了问题
+                    - epoll的监听是使用红黑树作为监听集合，并且红黑树创建在内核层中，不会出现重复拷贝的问题
+                    - 不再使用IO等待循环队列，epoll自己在内核层实现了一个epoll等待队列
+                    - epoll等待队列不在轮询监听，并且体积更小，效率更高
+                    - 对于如何知道哪个sock就绪，我们让监听的sock与网络设备网卡直接绑定，当有消息到达时，网卡知道是那个sock，直接通知epoll队列哪个sock就绪
+                        - 第一次调用callback，将监听的数据变为epitem，与网络设备绑定，实现监听
+                    - epoll收到通知后，这个sock的节点回调callback函数，将自己的节点（就绪）弹出进入就绪链表（双向链表结构）（内核），唤醒等待进程（pthread_cond_t条件变量实现挂起唤醒）
+                    - 就绪链表采用旋转锁，一直遍历看是否有就序的，有就拷贝传出，没有将调用的epoll_wait的线程/进程挂起
+                    - 然后将链表从内核空间拷贝到用户空间
+                    - epoll监听到就绪直接返回就绪节点（sock），用户遍历处理这些sock即可，用户需要在用户空间定义就绪队列（数组）
+                - 红黑树的节点
+                    - data.fd = sock
+                    - events：监听的事件
+                    - index：索引和sock值上相等
+                    - callback回调函数
+                - int epfd = epoll_create(int treeMax);创建监听树，参数为大小，返回值为指向树的描述符
+                - struct epoll_event node;
+                - node.data.fd = sock;
+                - node.events = EPOLLIN|EPOLLOUT|EPOLLERR
+                - epoll_ctl(epfd , EPOLL_CTL_ADD , sock , struct epollevent* node);//添加节点
+                - epoll_ctl(epfd , EPOLL_CTL_DEL , sock , NULL);//删除节点
+                - epoll_ctl(epfd , EPOLL_CTL_MOD , sock &node);//修改，只能修改监听事件，无法修改sock
+                - int readycode = epoll_wait(epfd , ready_array , Max , -1);//-1阻塞，0 非阻塞
+                - 优势
+                    - epoll监听集合在内核层，不会出现重复拷贝和重复挂载在问题，保证每个节点只拷贝一次，只挂载一次
+                    - epoll和poll一样，监听事件更丰富，而后设置监听比较灵活，可以对不同的sock设置不同的事件监听
+                    - epoll不用担心轮询问题，所以没有监听限制，可以监听系统最大描述符数量，并没有多余开销
+                    - epoll不存在轮询问题，无需担心监听数量增大，系统开销增大
+                    - epoll直接返回就绪的sock，用户直接处理即可
+                    - 最为监听模型，select，poll，epoll监听能力更强，但是处理能力与监听模型无关
+                - 监听部分（通过IO复用技术监听管理有效链接），处理部分（并发处理），又快又好的将请求全部处理掉（快速反应，提高体验）
+                - epoll的监听模式（水平触发模式EPOLLLT  边缘触发模式 EPOLLET）
+                    - 
+                    - 水平触发模式下（默认），用户对就绪的sock没有处理完，再次调用epoll_wait开始监听，立即返回，并且返回值为未处理完的就绪数量
+                    - 边缘触发模式，epoll不管出没处理完，仅通知一次，在调用开始新一轮的监听
+                    - 服务器代码错误添加任务的问题：监听sock与处理sock分离，水平模式下，监听速度比处理速度快，会导致epoll_wait频繁返回未处理的事件数量，导致异常添加多次任务
+                        - sock设置为边缘触发模式监听
+                        - 水平模式 + EPOLLONESHOT可以避免异常添加问题
+                - EPOLLONESHOT
+                    - 监听的sock就绪，可能一个sock会被交给多个线程去处理，引发冲突异常
+                        - sock第一次就绪，但由于任务较复杂，没处理完第二次sock到来，会交给另一个线程
+                    - EPOLLONESHOT使用时，当一个sock就绪后，会交给一个线程处理，此刻将sock从监听树中删除，当sock处理完毕，再次添加回监听树，预防频繁就绪，多个线程处理一个sock的问题
+                - epoll是线程安全的，epoll_ctl函数内部自带互斥锁，所以一个线程在访问修改树节点时，其他线程无法访问挂起等待
+            - 查看和更改可以使用的描述符最大值
+                - 查看
+                    - cat /proc/sys/fs/file-max
+                - 修改 sudo vi /etc/security/limits.conf
+            - epoll较为适合高并发低活跃场景，select适用于低监听量，高活跃场景
+            - 完成端口
+                - 异步非阻塞
+            - Kqueue
+                - 异步非阻塞
+            - 信号驱动IO
+    - 负载均衡
+        - 
+    - 代理服务器
+        - 
+    - HA高可用结构
+        - 
+    - EPOLL + 线程池模型
+        - 
+        - 线程池：多线程容器
+        - 线程池创建原则
+            - 预创建原则，线程池内部准备线程备用，不宜过多
+            - 线程应该有重用性，可以一对多处理任务或服务不同的客户端
+            - 处理单元（线程）数量并不固定，动态扩容与缩减（根据任务量）
+            - 设计灵活的任务传递方式与任务接口，线程可以执行不同种类的任务，不能将线程工作固定
+        - 手机号注册流程
+            - 
+        - 线程池实现过程中自定义函数
+            - thread_pool_create(int max , int m in , int qmax);
+            - int thread_producer_add(pool_t* pt , busines_t bs);//添加一次业务到队列中（生产者调用）
+            - void* thread_customer(void* arg);//消费者线程任务，等待队列，循环获取业务并执行
+            - void* thread_manager(void* arg);//管理者线程任务，查看线程池阈值，动态扩容缩减线程
+            - int net_init();//网络服务器初始化
+            - int first_response(int scok , struct sockaddr_in);//链接成功首次响应
+            - int epoll_init();//epoll创建初始化
+            - int epoll_listen();//主线程任务，循环监听sock事件，并且根据就绪添加任务
+            - void* accept_busines(void* arg);//链接业务
+            - void* recv_busines(void* arg);//响应处理业务
+            - if_thread_alive(pthread_t tid);//测试线程，返回0表示线程失效，1表示有效
+    - 反应堆模型（reactor）
